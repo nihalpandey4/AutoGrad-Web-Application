@@ -1,0 +1,11 @@
+.login-window{
+    max-width: 40%;
+    position: absolute;
+    top:20%;
+    left:50%;
+    transform: translateX(-50%);
+}
+
+div.ui.stacked.segment{
+    padding :2rem;
+}
