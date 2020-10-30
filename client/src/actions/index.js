@@ -10,3 +10,10 @@ export  const signOut = ()=>{
         type: "SIGN_OUT"
     };
 };
+
+export const getTestId = (testId)=>{
+    return {
+        type: "GET_TEST_ID",
+        payload : testId
+    }
+}
