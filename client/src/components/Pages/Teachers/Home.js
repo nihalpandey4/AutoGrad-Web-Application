@@ -1,14 +1,13 @@
 import React from 'react'
 
-import GoogleOAuth from "../../GoogleOAuth";
+import Header from "../../Header";
 
 class Home extends React.Component{
     render(){
         return (
-            <div>
-                <h1>Teacher home page</h1>
-                <GoogleOAuth/>
-            </div>
+            <>
+              <Header/>
+            </>
         )
     }
 }

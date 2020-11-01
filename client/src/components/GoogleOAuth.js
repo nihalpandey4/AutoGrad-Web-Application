@@ -61,10 +61,10 @@ class GoogleOAuth extends React.Component{
             )
         }
     }
-    
+
     render () {
         return (
-            <>{this.signButton()}</>
+            <div className="item">{this.signButton()}</div>
         )
     }
 }
