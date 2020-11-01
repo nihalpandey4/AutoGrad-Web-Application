@@ -9,10 +9,12 @@ import {signIn,signOut} from "../actions";
 class GoogleOAuth extends React.Component{
     componentDidMount(){
         //this function is executed only once when it is rendered first time
+
+        //gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getEmail()
         window.gapi.load("client:auth2",()=>{
             window.gapi.client.init({
                 clientId: "150690585145-c0bk32r9msgekdeohliuc5ple0vq80f8.apps.googleusercontent.com",
-                scope :"email"
+                scope :"profile email"
             }).then(()=>{
                 this.user=window.gapi.auth2.getAuthInstance();
                 this.onAuthChange(this.user.isSignedIn.get());
@@ -24,13 +26,13 @@ class GoogleOAuth extends React.Component{
         //then () is executed once the promise is fulfilled
         //class variable user  = auth instance 
         //for checking the initial state of the auth it is passed in .onAuthChange()
-        //eventlistener on the state of sign in is attahched using default fn present in gapi "onAuthChange"
+        //eventlistener on the state of sign in is attached using default fn present in gapi "onAuthChange"
     }
 
     onAuthChange = (isSignedIn)=>{
         if(isSignedIn){
-            this.props.signIn(this.user.currentUser.get().getId());
-            //incase while signing the user in store his email id, Id will of numerical form rather than being normal id.
+            this.props.signIn(this.user.currentUser.get().getBasicProfile().getEmail());
+            //incase while signing the user in store his email id
         }
         else{
             this.props.signOut();
@@ -59,7 +61,7 @@ class GoogleOAuth extends React.Component{
             )
         }
     }
-
+    
     render () {
         return (
             <>{this.signButton()}</>

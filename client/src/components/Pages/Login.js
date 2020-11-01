@@ -1,7 +1,8 @@
 import React from "react";
 import {connect} from "react-redux";
-import {getTestId} from "../../actions"
+import {Link} from "react-router-dom";
 
+import {getTestId} from "../../actions"
 import GoogleOAuth from "../GoogleOAuth";
 
 class Login extends React.Component {
@@ -11,6 +12,15 @@ class Login extends React.Component {
 
   handleSubmit = (event)=>{
       event.preventDefault();
+      if(!event.target.value){
+        window.alert("Enter valid test id");
+      }
+  }
+
+  onTeacherSignedIn = ()=>{
+    if(this.props.isSignedIn===true){
+      this.props.history.push('/teacher');
+    }
   }
 
   render() {
@@ -42,15 +52,19 @@ class Login extends React.Component {
 
           <div className="ui message">
             In case you are a teacher&nbsp;&nbsp; <GoogleOAuth />
+            {this.onTeacherSignedIn()}
           </div>
-        </div>
+        </div> 
       </div>
     );
   }
 }
 
 const mapStateToProps = (state)=>{
-    return {testId:state.testId};
+    return {
+      testId:state.testId,
+      isSignedIn:state.auth.isSignedIn
+    };
 }
 
 
