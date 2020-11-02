@@ -16,12 +16,6 @@ class Login extends React.Component {
       }
   }
 
-  onTeacherSignedIn = ()=>{
-    if(this.props.isSignedIn===true){
-      this.props.history.push('/teacher');
-    }
-  }
-
   render() {
     return (
       <div className="ui middle aligned center aligned grid login-window">
@@ -51,7 +45,6 @@ class Login extends React.Component {
 
           <div className="ui message">
             In case you are a teacher&nbsp;&nbsp; <GoogleOAuth />
-            {this.onTeacherSignedIn()}
           </div>
         </div> 
       </div>
