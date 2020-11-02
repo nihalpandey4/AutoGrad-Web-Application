@@ -16,7 +16,14 @@ class Login extends React.Component {
       }
   }
 
+  whenTeacherSignedIn=()=>{
+    if(this.props.isSignedIn===true){
+      this.props.history.push("/teacher");
+    }
+  }
+
   render() {
+    this.whenTeacherSignedIn();
     return (
       <div className="ui middle aligned center aligned grid login-window">
         <div className="column">

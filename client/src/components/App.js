@@ -5,6 +5,7 @@ import "./App.css"
 import Login from "./Pages/Login";
 import TeacherHome from "../components/Pages/Teachers/Home"
 import history from "./history";
+import NewTest from "../components/Pages/Teachers/New";
 
 class App extends React.Component{
     render=()=>{
@@ -13,6 +14,7 @@ class App extends React.Component{
                 <Router history={history}>
                     <Route path="/" exact component = {Login} />
                     <Route path ="/teacher" exact  component={TeacherHome} />
+                    <Route path ="/teacher/new" exact component={NewTest}/>
                 </Router>
             </div>
         )

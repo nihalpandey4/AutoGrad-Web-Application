@@ -1,9 +1,10 @@
 import history from "../components/history";
 
+import {SIGN_IN,SIGN_OUT,GET_TEST_ID} from "./types"
+
 export const signIn = (userId) =>{
-    history.push("/teacher");
     return {
-        type: "SIGN_IN",
+        type: SIGN_IN,
         payload: userId
     };
 };
@@ -11,13 +12,13 @@ export const signIn = (userId) =>{
 export  const signOut = ()=>{
     history.push("/");
     return {
-        type: "SIGN_OUT"
+        type: SIGN_OUT
     };
 };
 
 export const getTestId = (testId)=>{
     return {
-        type: "GET_TEST_ID",
+        type: GET_TEST_ID,
         payload : testId
     }
 };
