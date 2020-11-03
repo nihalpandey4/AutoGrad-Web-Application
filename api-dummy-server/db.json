@@ -1,22 +1,24 @@
 {
   "tests": [
     {
-      "wordLimit": "123",
-      "Question0": "wasd",
-      "CorrectAnswer0": "1ad",
-      "MaxMarks0": "1",
-      "timeLimit": "43",
+      "wordLimit": "50",
+      "timeLimit": "30",
+      "Question0": "what is your name?",
+      "CorrectAnswer0": "nihal",
+      "MaxMarks0": "5",
       "id": 1
     },
     {
-      "wordLimit": "12",
-      "timeLimit": "34",
-      "Question0": "yaeh",
-      "CorrectAnswer0": "adms,md",
-      "MaxMarks0": "123",
-      "Question1": "wahas",
-      "CorrectAnswer1": "saksj",
-      "MaxMarks1": "123",
+      "testId": "73b531fa-583c-4aac-b1ce-8f3ad922353e",
+      "timeLimit": "20",
+      "wordLimit": "50",
+      "qA": [
+        {
+          "Question": "sample question",
+          "CorrectAnswer": "sample answer",
+          "MaxMarks": "6"
+        }
+      ],
       "id": 2
     }
   ]
