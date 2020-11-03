@@ -1,8 +1,10 @@
 import React from 'react'
 import Header from "../../Header";
 import {Field,reduxForm} from "redux-form";
+import {connect} from "react-redux";
 
 import QandABlock from "../../QandABlock";
+import {createTest} from "../../../actions";
 
 class New extends React.Component {
     state ={list:[1]}
@@ -24,6 +26,7 @@ class New extends React.Component {
 
     onSubmit=(formValues)=>{
         console.log(formValues);
+        this.props.createTest(formValues);
     }
 
     render(){
@@ -58,7 +61,9 @@ class New extends React.Component {
                     <div className="ui hidden divider"></div>
 
                     <div className="field" style={{textAlign:"center"}}>
-                        <button className="ui button huge red">Create Test Id</button>
+                        <button className="ui button huge red" type="submit" onClick={()=>{console.log("submission initiated")}}>
+                            Create Test Id
+                        </button>
                     </div>
 
                 </form>
@@ -67,6 +72,10 @@ class New extends React.Component {
     }
 }
 
-export default reduxForm({
+const wrappedForm= reduxForm({
     form:"createNewTest"
 })(New);
+
+export default connect(null,{
+    createTest
+})(wrappedForm)
