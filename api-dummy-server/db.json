@@ -1,0 +1,23 @@
+{
+  "tests": [
+    {
+      "wordLimit": "123",
+      "Question0": "wasd",
+      "CorrectAnswer0": "1ad",
+      "MaxMarks0": "1",
+      "timeLimit": "43",
+      "id": 1
+    },
+    {
+      "wordLimit": "12",
+      "timeLimit": "34",
+      "Question0": "yaeh",
+      "CorrectAnswer0": "adms,md",
+      "MaxMarks0": "123",
+      "Question1": "wahas",
+      "CorrectAnswer1": "saksj",
+      "MaxMarks1": "123",
+      "id": 2
+    }
+  ]
+}
