@@ -1,25 +1,3 @@
 {
-  "tests": [
-    {
-      "wordLimit": "50",
-      "timeLimit": "30",
-      "Question0": "what is your name?",
-      "CorrectAnswer0": "nihal",
-      "MaxMarks0": "5",
-      "id": 1
-    },
-    {
-      "testId": "73b531fa-583c-4aac-b1ce-8f3ad922353e",
-      "timeLimit": "20",
-      "wordLimit": "50",
-      "qA": [
-        {
-          "Question": "sample question",
-          "CorrectAnswer": "sample answer",
-          "MaxMarks": "6"
-        }
-      ],
-      "id": 2
-    }
-  ]
+  "tests": []
 }

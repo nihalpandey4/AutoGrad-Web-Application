@@ -10,7 +10,7 @@ import {createTest} from "../../../actions";
 class New extends React.Component {
     state ={list:[1]}
 
-    addQuestion=(formValues)=>{
+    addQuestion=()=>{
         let temp =this.state.list;
         temp.push(1);
         this.setState({list:temp});
@@ -22,25 +22,29 @@ class New extends React.Component {
                 <label>{label}</label>
                 <input {...input} type="number" required />
             </div>
-        )
+        );
     }
 
     onSubmit=(formValues)=>{
         const testId=uuidv4();
+        const email = this.props.emailId;
         let request={};
-        request.testId = testId;
-        request.timeLimit =formValues.timeLimit;
-        request.wordLimit = formValues.wordLimit;
-        request.qA=[];
+        request[email]=[];
+        let sample2 ={};
+        sample2.testId = testId;
+        sample2.timeLimit =formValues.timeLimit;
+        sample2.wordLimit = formValues.wordLimit;
+        sample2.qA=[];
         let i=0;
         while(formValues[`Question${i}`]){
             let sample = {};
             sample[`Question`]=formValues[`Question${i}`];
             sample[`CorrectAnswer`]=formValues[`CorrectAnswer${i}`];
             sample[`MaxMarks`]=formValues[`MaxMarks${i}`];
-            request.qA.push(sample);
+            sample2.qA.push(sample);
             i=i+1;
         }
+        request[email].push(sample2);
         this.props.createTest(request);
     }
 
@@ -91,6 +95,10 @@ const wrappedForm= reduxForm({
     form:"createNewTest"
 })(New);
 
-export default connect(null,{
+const mapStateToProps = (state)=>{
+    return{emailId:state.auth.userId};
+}
+
+export default connect(mapStateToProps,{
     createTest
 })(wrappedForm)

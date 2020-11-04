@@ -22,7 +22,7 @@ class GoogleOAuth extends React.Component{
             });
         });
         //gapi is of window scope
-        //gapi is initialised using client id and scope this is a promise hence then ()
+        //gapi is initialised using client id and scope this is a promise hence then () 
         //then () is executed once the promise is fulfilled
         //class variable user  = auth instance 
         //for checking the initial state of the auth it is passed in .onAuthChange()
