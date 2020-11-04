@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM  from "react-dom";
+import ReactDO  from "react-dom";
 import {Provider} from "react-redux";
 import {createStore,applyMiddleware,compose } from "redux";
 import reduxThunk from "redux-thunk";
@@ -13,11 +13,12 @@ const store = createStore(
     composeEnhancers(applyMiddleware(reduxThunk))
 );
 
-ReactDOM.render(
+ReactDO.render(
     <Provider store={store}>
-        <App />
+        <App/>
     </Provider>,
     document.querySelector('#root')
 );
+
 
 //GoogleOAuth client ID - 235695202461-2gvmgao3ec2j9u8733p7aasvjsp3hep5.apps.googleusercontent.com

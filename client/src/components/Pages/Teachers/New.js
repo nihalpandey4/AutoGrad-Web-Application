@@ -2,6 +2,7 @@ import React from 'react'
 import Header from "../../Header";
 import {Field,reduxForm} from "redux-form";
 import {connect} from "react-redux";
+import {v4 as uuidv4} from "uuid";
 
 import QandABlock from "../../QandABlock";
 import {createTest} from "../../../actions";
@@ -25,8 +26,22 @@ class New extends React.Component {
     }
 
     onSubmit=(formValues)=>{
-        console.log(formValues);
-        this.props.createTest(formValues);
+        const testId=uuidv4();
+        let request={};
+        request.testId = testId;
+        request.timeLimit =formValues.timeLimit;
+        request.wordLimit = formValues.wordLimit;
+        request.qA=[];
+        let i=0;
+        while(formValues[`Question${i}`]){
+            let sample = {};
+            sample[`Question`]=formValues[`Question${i}`];
+            sample[`CorrectAnswer`]=formValues[`CorrectAnswer${i}`];
+            sample[`MaxMarks`]=formValues[`MaxMarks${i}`];
+            request.qA.push(sample);
+            i=i+1;
+        }
+        this.props.createTest(request);
     }
 
     render(){
