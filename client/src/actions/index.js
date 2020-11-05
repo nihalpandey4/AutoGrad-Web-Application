@@ -1,7 +1,7 @@
 import history from "../components/history";
 
 import dummy from "../components/apis/dummy-api";
-import {SIGN_IN,SIGN_OUT,GET_TEST_ID,CREATE_TEST,GET_ALL_TESTS, DELETE_TEST} from "./types"
+import {SIGN_IN,SIGN_OUT,GET_TEST_ID,CREATE_TEST,GET_ALL_TESTS, DELETE_TEST,GET_TESTS_BY_CURRENT_USER} from "./types"
 
 export const signIn = (userId) =>{
     return {
@@ -37,12 +37,9 @@ export const createTest = (formValues)=>{
 
 export const getAllTests=()=>async (dispatch,getState)=>{
     const response = await dummy.get("/tests");
-    const emailId = getState().auth.userId;
-    response.data.map((test)=>console.log(test.createdBy));
-    console.log(response.data.filter((test)=>test.createdBy==emailId));
     dispatch({
         type:GET_ALL_TESTS,
-        payload:response.data.filter((test)=>test.createdBy===emailId)
+        payload:response.data
     });
 }
 
@@ -68,4 +65,11 @@ export const updateTest=(id,formValues)=>async(dispatch)=>{
         type:"UPDATE_TEST",
         payload:response.data
     })
+}
+
+export const getTestByCurrentUser = (tests)=>{
+    return {
+        type:GET_TESTS_BY_CURRENT_USER,
+        payload:tests
+    }
 }

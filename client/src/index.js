@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDO  from "react-dom";
+import ReactDOM  from "react-dom";
 import {Provider} from "react-redux";
 import {createStore,applyMiddleware,compose } from "redux";
 import reduxThunk from "redux-thunk";
@@ -13,7 +13,7 @@ const store = createStore(
     composeEnhancers(applyMiddleware(reduxThunk))
 );
 
-ReactDO.render(
+ReactDOM.render(
     <Provider store={store}>
         <App/>
     </Provider>,

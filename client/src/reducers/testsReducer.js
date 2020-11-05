@@ -10,15 +10,15 @@ import {
 const testsReducer=(state={},action)=>{
     switch(action.type){
         case GET_TEST:
-            return {...state,[action.payload.id]:action.payload};
+            return {...state,[action.payload.testId]:action.payload};
         case CREATE_TEST:
-            return {...state,[action.payload.id]:action.payload};
+            return {...state,[action.payload.testId]:action.payload};
         case UPDATE_TEST:
-            return {...state,[action.payload.id]:action.payload};
+            return {...state,[action.payload.testId]:action.payload};
         case DELETE_TEST:
             return _.omit(state,action.payload);
         case GET_ALL_TESTS:
-            return {...state,..._.mapKeys(action.payload,"id")};
+            return {...state,..._.mapKeys(action.payload,"testId")};
         default:
             return state;
     }
