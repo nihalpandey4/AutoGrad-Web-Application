@@ -35,11 +35,14 @@ export const createTest = (formValues)=>{
     }
 }
 
-export const getAllTests=()=>async (dispatch)=>{
+export const getAllTests=()=>async (dispatch,getState)=>{
     const response = await dummy.get("/tests");
+    const emailId = getState().auth.userId;
+    response.data.map((test)=>console.log(test.createdBy));
+    console.log(response.data.filter((test)=>test.createdBy==emailId));
     dispatch({
         type:GET_ALL_TESTS,
-        payload:response.data
+        payload:response.data.filter((test)=>test.createdBy===emailId)
     });
 }
 

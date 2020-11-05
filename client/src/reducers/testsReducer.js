@@ -7,7 +7,7 @@ import {
     DELETE_TEST
 } from "../actions/types"
 
-const streamReducer=(state={},action)=>{
+const testsReducer=(state={},action)=>{
     switch(action.type){
         case GET_TEST:
             return {...state,[action.payload.id]:action.payload};
@@ -24,4 +24,4 @@ const streamReducer=(state={},action)=>{
     }
 }
 
-export default streamReducer;
+export default testsReducer;

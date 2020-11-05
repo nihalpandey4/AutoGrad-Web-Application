@@ -1,12 +1,14 @@
 import React from 'react'
 import {Link} from "react-router-dom"
+import {connect} from "react-redux";
+import {getAllTests} from "../../../actions"
 
 import Header from "../../Header";
 
 class Home extends React.Component{
 
   componentDidMount(){
-    console.log(this.props);
+    this.props.getAllTests();
   }
 
     render(){
@@ -21,4 +23,4 @@ class Home extends React.Component{
     }
 }
 
-export default Home;
+export default connect(null,{getAllTests})(Home);

@@ -1,3 +1,23 @@
 {
-  "tests": []
+  "tests": [
+    {
+      "createdBy": "pyash0227@gmail.com",
+      "testId": "5a8b1ce5-8ff6-4a38-8947-c557e18aa242",
+      "timeLimit": "5",
+      "wordLimit": "5",
+      "qA": [
+        {
+          "Question": "1",
+          "CorrectAnswer": "1",
+          "MaxMarks": "5"
+        },
+        {
+          "Question": "2",
+          "CorrectAnswer": "2",
+          "MaxMarks": "2"
+        }
+      ],
+      "id": 1
+    }
+  ]
 }
