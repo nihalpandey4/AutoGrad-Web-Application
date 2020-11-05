@@ -35,7 +35,7 @@ export const createTest = (formValues)=>{
     }
 }
 
-export const getAllTests=()=>async (dispatch,getState)=>{
+export const getAllTests=()=>async (dispatch)=>{
     const response = await dummy.get("/tests");
     dispatch({
         type:GET_ALL_TESTS,

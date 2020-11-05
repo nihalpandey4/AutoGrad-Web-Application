@@ -29,21 +29,26 @@ class New extends React.Component {
         const testId=uuidv4();
         const email = this.props.emailId;
         let request={};
-        request["createdBy"]=email;
-        request.testId = testId;
-        request.timeLimit =formValues.timeLimit;
-        request.wordLimit = formValues.wordLimit;
-        request.qA=[];
+        request[email]=[];
+        let temp={};
+        test.createdBy=email;
+        temp.attemptedBy=0;
+        temp.testId = testId;
+        temp.timeLimit =formValues.timeLimit;
+        temp.wordLimit = formValues.wordLimit;
+        temp.qA=[];
         let i=0;
         while(formValues[`Question${i}`]){
             let sample = {};
             sample[`Question`]=formValues[`Question${i}`];
             sample[`CorrectAnswer`]=formValues[`CorrectAnswer${i}`];
             sample[`MaxMarks`]=formValues[`MaxMarks${i}`];
-            request.qA.push(sample);
+            temp.qA.push(sample);
             i=i+1;
         }
-        this.props.createTest(request);
+        request[email].push(temp);
+        console.log(request);
+        this.props.createTest(request,email);
     }
 
     render(){
