@@ -8,9 +8,7 @@ def home():
 
 @app.route("/tests",methods=['POST'])
 def getNewTest():
-    data = request.form
-    print("inside request handler")
-    print(data);
+    return "Hello world"
 
 if __name__ =="__main__":
     app.run(debug=True)
