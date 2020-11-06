@@ -6,6 +6,7 @@ import {v4 as uuidv4} from "uuid";
 
 import QandABlock from "../../QandABlock";
 import {createTest} from "../../../actions";
+import flaskApi from "../../apis/flask-api";
 
 class New extends React.Component {
     state ={list:[1]}
@@ -31,7 +32,7 @@ class New extends React.Component {
         let request={};
         request[email]=[];
         let temp={};
-        test.createdBy=email;
+        temp.createdBy=email;
         temp.attemptedBy=0;
         temp.testId = testId;
         temp.timeLimit =formValues.timeLimit;
@@ -47,8 +48,13 @@ class New extends React.Component {
             i=i+1;
         }
         request[email].push(temp);
-        console.log(request);
-        this.props.createTest(request,email);
+        //this.props.createTest(request,email);
+        this.flaskApiCall(request);
+    }
+
+    flaskApiCall=async(request)=>{
+        const response =await flaskApi.post("/",request);
+        console.log(response);
     }
 
     render(){
