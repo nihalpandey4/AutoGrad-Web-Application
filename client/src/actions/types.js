@@ -6,4 +6,3 @@ export const GET_ALL_TESTS="GET_ALL_TESTS";
 export const UPDATE_TEST = "UPDATE_TEST";
 export const DELETE_TEST = "DELETE_TEST";
 export const GET_TEST = "GET_TEST";
-export const GET_TESTS_BY_CURRENT_USER="GET_TEST_BY_CURRENT_USER";

@@ -1,20 +1,13 @@
 import React from 'react'
 import {Link} from "react-router-dom"
 import {connect} from "react-redux";
-import {getAllTests,getTestByCurrentUser} from "../../../actions"
+import {getAllTests} from "../../../actions"
 
 import Header from "../../Header";
 
 class Home extends React.Component{
-  componentDidMount=async()=>{
-    await this.props.getAllTests();
-    let temp=[];
-    Object.keys(this.props.tests).forEach(testId=>{
-      if(this.props.tests[testId].createdBy===this.props.userId){
-        temp.push(this.props.tests[testId]);
-      }
-    })
-    this.props.getTestByCurrentUser(temp);
+  componentDidMount=()=>{
+    this.props.getAllTests(this.props.userId);
   }
   
   render(){
@@ -35,4 +28,4 @@ const mapStateToProps =(state)=>{
     userId:state.auth.userId
   }
 }
-export default connect(mapStateToProps,{getAllTests,getTestByCurrentUser})(Home);
+export default connect(mapStateToProps,{getAllTests})(Home);

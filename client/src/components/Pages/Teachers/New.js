@@ -6,7 +6,6 @@ import {v4 as uuidv4} from "uuid";
 
 import QandABlock from "../../QandABlock";
 import {createTest} from "../../../actions";
-import flaskApi from "../../apis/flask-api";
 
 class New extends React.Component {
     state ={list:[1]}
@@ -28,33 +27,24 @@ class New extends React.Component {
 
     onSubmit=(formValues)=>{
         const testId=uuidv4();
-        const email = this.props.emailId;
+        const userId = this.props.userId;
         let request={};
-        request[email]=[];
-        let temp={};
-        temp.createdBy=email;
-        temp.attemptedBy=0;
-        temp.testId = testId;
-        temp.timeLimit =formValues.timeLimit;
-        temp.wordLimit = formValues.wordLimit;
-        temp.qA=[];
+        request.createdBy=userId;
+        request.attemptedBy=0;
+        request.testId = testId;
+        request.timeLimit =formValues.timeLimit;
+        request.wordLimit = formValues.wordLimit;
+        request.qA=[];
         let i=0;
         while(formValues[`Question${i}`]){
             let sample = {};
             sample[`Question`]=formValues[`Question${i}`];
             sample[`CorrectAnswer`]=formValues[`CorrectAnswer${i}`];
             sample[`MaxMarks`]=formValues[`MaxMarks${i}`];
-            temp.qA.push(sample);
+            request.qA.push(sample);
             i=i+1;
         }
-        request[email].push(temp);
-        //this.props.createTest(request,email);
-        this.flaskApiCall(request);
-    }
-
-    flaskApiCall=async(request)=>{
-        const response =await flaskApi.post("/",request);
-        console.log(response);
+        this.props.createTest(request);
     }
 
     render(){
@@ -104,10 +94,6 @@ const wrappedForm= reduxForm({
     form:"createNewTest"
 })(New);
 
-const mapStateToProps = (state)=>{
-    return{emailId:state.auth.userId};
-}
-
-export default connect(mapStateToProps,{
+export default connect(null,{
     createTest
 })(wrappedForm)

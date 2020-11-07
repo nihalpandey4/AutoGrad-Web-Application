@@ -31,7 +31,7 @@ class GoogleOAuth extends React.Component{
 
     onAuthChange = (isSignedIn)=>{
         if(isSignedIn){
-            this.props.signIn(this.user.currentUser.get().getBasicProfile().getEmail());
+            this.props.signIn(this.user.currentUser.get().getId());
             //incase while signing the user in store his email id
         }
         else{
