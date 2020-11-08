@@ -22,6 +22,10 @@ def home(userId):
         _id=document["testId"]
         document['_id']=_id
         mongo.db[userId].insert_one(document)
+        testPaper={}
+        testPaper['_id']=_id
+        testPaper['userId'] =userId
+        mongo.db.tests.insert_one(testPaper)
         print("post request")
         return jsonify(document)
     else:
@@ -30,13 +34,23 @@ def home(userId):
         print("get request")
         return tests
 
-@app.route('/tests',methods=['GET','POST'])
-def getNewTest():
+@app.route('/tests/<string:testId>',methods=['GET','POST'])
+def getNewTest(testId):
     if(request.method=='POST'):
         some_request=request.get_json()
         return jsonify({"you_sent":some_request})
     else:
-        return jsonify ({message:"not the post request"})
+        query={}
+        query["_id"]=testId
+        response  = mongo.db.tests.find_one(query)
+        if(response==None):
+            print(response)
+            return jsonify({'message':"Error"})
+        userId = response['userId']
+        document={}
+        document = mongo.db[userId].find_one(query)
+        document= dumps(document)
+        return document
 
 if __name__ =="__main__":
     app.run(port=3001,debug=True)

@@ -1,26 +1,35 @@
 import React from "react";
-import {connect} from "react-redux";
+import { Field, reduxForm } from "redux-form";
+import { connect } from "react-redux";
 
-import {getTestId} from "../../actions"
+import {getTestForAssessment} from "../../actions/index"
 import GoogleOAuth from "../GoogleOAuth";
 
 class Login extends React.Component {
-  onChange = (event) => {
-      this.props.getTestId(event.target.value);
+  handleSubmit = (formValues) => {
+    this.props.getTestForAssessment(formValues.testId)
   };
 
-  handleSubmit = (event)=>{
-      event.preventDefault();
-      if(!event.target.value){
-        window.alert("Enter valid test id");
-      }
-  }
-
-  whenTeacherSignedIn=()=>{
-    if(this.props.isSignedIn===true){
+  whenTeacherSignedIn = () => {
+    if (this.props.isSignedIn === true) {
       this.props.history.push("/teacher");
     }
-  }
+  };
+
+  renderTestIdField = ({input,name,placeholder}) => {
+    return (
+      <div className="ui left icon input">
+        <i className="user icon"></i>
+        <input
+          type="text"
+          name={name}
+          placeholder={placeholder}
+          {...input}
+          required={true}
+        />
+      </div>
+    );
+  };
 
   render() {
     this.whenTeacherSignedIn();
@@ -31,42 +40,41 @@ class Login extends React.Component {
             <div className="content">Welcome to AutoGrad</div>
           </h2>
 
-          <form className="ui large form error">
+          <form
+            className="ui large form error"
+            onSubmit={this.props.handleSubmit(this.handleSubmit)}>
             <div className="ui stacked segment">
               <div className="field">
-                <div className="ui left icon input">
-                  <i className="user icon"></i>
-                  <input
-                    type="text"
-                    value={this.props.testId}
-                    name="test-id"
-                    placeholder="Test Id (cannot remain empty)"
-                    onChange={this.onChange}
-                    required = {true}
-                  />
-                </div>
+                <Field name="testId" placeholder="Test Id (cannot remain empty)" component={this.renderTestIdField} /> 
               </div>
-              <button type = "submit" className="ui fluid large teal submit button" onClick = {this.handleSubmit}>Enter</button>
+              <button
+                type="submit"
+                className="ui fluid large teal submit button">
+                Enter
+              </button>
             </div>
           </form>
 
           <div className="ui message">
             In case you are a teacher&nbsp;&nbsp; <GoogleOAuth />
           </div>
-        </div> 
+        </div>
       </div>
     );
   }
 }
 
-const mapStateToProps = (state)=>{
-    return {
-      testId:state.testId,
-      isSignedIn:state.auth.isSignedIn
-    };
-}
+const wrappedForm = reduxForm({
+  form:"testIdForm"
+})(Login)
 
+const mapStateToProps = (state) => {
+  return {
+    isSignedIn: state.auth.isSignedIn,
+    testPaper:state.testPaper
+  };
+};
 
 export default connect(mapStateToProps,{
-    getTestId
-})(Login);
+  getTestForAssessment
+})(wrappedForm);

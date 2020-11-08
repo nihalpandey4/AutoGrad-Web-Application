@@ -79,7 +79,7 @@ class New extends React.Component {
                     <div className="ui hidden divider"></div>
 
                     <div className="field" style={{textAlign:"center"}}>
-                        <button className="ui button huge red" type="submit" onClick={()=>{console.log("submission initiated")}}>
+                        <button className="ui button huge red" type="submit">
                             Create Test Id
                         </button>
                     </div>

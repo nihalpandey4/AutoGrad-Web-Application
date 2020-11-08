@@ -1,6 +1,6 @@
 import history from "../components/history";
 import flask from "../components/apis/flask-api";
-import {SIGN_IN,SIGN_OUT,GET_TEST_ID,CREATE_TEST,GET_ALL_TESTS, DELETE_TEST} from "./types"
+import {SIGN_IN,SIGN_OUT,CREATE_TEST,GET_ALL_TESTS, DELETE_TEST,GET_TEST_FOR_ASSESSMENT,GET_TEST_FOR_TEACHER} from "./types"
 
 export const signIn = (userId) =>{
     return {
@@ -14,13 +14,6 @@ export  const signOut = ()=>{
     return {
         type: SIGN_OUT
     };
-};
-
-export const getTestId = (testId)=>{
-    return {
-        type: GET_TEST_ID,
-        payload : testId
-    }
 };
 
 export const createTest = (formValues)=>{
@@ -43,11 +36,25 @@ export const getAllTests=(userId)=>async (dispatch)=>{
     });
 }
 
-export const getTest=(testId)=>async (dispatch,getState)=>{
+export const getTestForTeacher=(testId)=>async (dispatch,getState)=>{
     const userId =getState().auth.userId;
     const response  = await flask.get(`/${userId}/${testId}`);
     dispatch({
-        type:"GET_TEST",
+        type:GET_TEST_FOR_TEACHER,
+        payload:response.data
+    })
+}
+
+export const getTestForAssessment=(testId)=>async (dispatch)=>{
+    const response  = await flask.get(`/tests/${testId}`);
+    if(response.data.message==="Error"){
+        alert("Enter correct Test Id")
+    }
+    else{
+        history.push("/student");
+    }
+    dispatch({
+        type:GET_TEST_FOR_ASSESSMENT,
         payload:response.data
     })
 }
