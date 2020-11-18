@@ -7,6 +7,7 @@ import TeacherHome from "../components/Pages/Teachers/Home"
 import history from "./history";
 import NewTest from "../components/Pages/Teachers/New";
 import AnswerSheet from "../components/Pages/Student/AnswerSheet";
+import DeleteTest from "../components/Pages/Teachers/DeleteTest";
 
 class App extends React.Component{
     render=()=>{
@@ -16,6 +17,7 @@ class App extends React.Component{
                     <Route path="/" exact component = {Login} />
                     <Route path ="/teacher" exact  component={TeacherHome} />
                     <Route path ="/teacher/new" exact component={NewTest}/>
+                    <Route path = "/teacher/delete/:id" component ={DeleteTest} />  
                     <Route path = "/student" exact component={AnswerSheet} />
                 </Router>
             </div>

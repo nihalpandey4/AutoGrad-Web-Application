@@ -38,11 +38,11 @@ export const createTest = (formValues) => {
 
 export const getAllTests = (userId) => async (dispatch) => {
   const response = await flask.get(`/${userId}`);
-  console.log(response);
   dispatch({
     type: GET_ALL_TESTS,
     payload: response.data,
   });
+  history.push("/teacher")
 };
 
 export const getTestForTeacher = (testId) => async (dispatch, getState) => {
