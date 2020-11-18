@@ -22,7 +22,8 @@ class StreamDelete extends React.Component {
   }
 
   onActionClicked = () => {
-    this.props.deleteTest(this.props.match.params.id);
+    //console.log(this.props.test)
+    this.props.deleteTest(this.props.test.testId);
   };
 
   render = () => {

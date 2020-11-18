@@ -68,15 +68,16 @@ export const getTestForAssessment = (testId) => async (dispatch) => {
   }
 };
 
-export const deleteTest = (id) => async (dispatch, getState) => {
-  const userId = getState().auth.userId;
-  const response = await flask.delete(`{/${userId}/${id}}`);
-  dispatch({
-    type: DELETE_TEST,
-    payload: response.data,
-  });
-};
-
+export const deleteTest = (testId) => async (dispatch, getState) => {
+    const userId = getState().auth.userId;
+    const response = await flask.delete(`/${userId}/${testId}`);
+    dispatch({
+      type: DELETE_TEST,
+      payload: response.data,
+    });
+    history.push('/');
+  };
+  
 export const updateTest = (id, formValues) => async (dispatch, getState) => {
   const userId = getState().auth.userId;
   const response = await flask.put(`/${userId}/${id}`, formValues);

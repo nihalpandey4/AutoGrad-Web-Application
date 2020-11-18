@@ -14,6 +14,23 @@ cors = CORS(app,resources = {
 app.config['MONGO_URI']="mongodb://localhost:27017/autoGrad"
 mongo = PyMongo(app)
 
+@app.route('/<string:uId>/<string:testId>',methods=['GET','PUT','DELETE'])
+def testscrud(uId,testId):
+    if(request.method=="GET"):
+        tests=mongo.db[uId].find({"_id":testId})
+        tests= dumps(tests)
+        print("get request")
+        return tests
+    elif(request.method=="PUT"):
+        tests=mongo.db[uId].find({"_id":testId})
+        tests= dumps(tests)
+        print("putrequest")
+        return tests
+    else:
+        mongo.db[uId].delete_one({"_id":testId})
+        print("delete request received")
+        return jsonify ({"message":"success"})
+
 @app.route('/<string:userId>',methods=['GET','POST'])
 def home(userId):
     if(request.method=='POST'):
