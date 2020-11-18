@@ -2,7 +2,6 @@ import React from "react";
 
 class Listitems extends  React.Component{
     render(){
-        const item = this.props.item;
         return(
             <div className="item">
                 <div className="right floated content">
@@ -11,12 +10,7 @@ class Listitems extends  React.Component{
                     <div className="ui red button">Delete</div>
                 </div>
                 <div className="content">
-                    <div>
-                        <span className="ui subheading">Test Id = </span>{item.testId}
-                    </div>
-                    <div>
-                        <span className="ui subheading">Attempted By = </span>{item.attemptedBy}
-                    </div>
+                    {this.props.content}
                 </div>
             </div>
         ) 

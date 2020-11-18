@@ -10,7 +10,7 @@ class Login extends React.Component {
     this.props.getTestForAssessment(formValues.testId)
   };
 
-  whenTeacherSignedIn = () => {
+  programmaticNavigation = () => {
     if (this.props.isSignedIn === true) {
       this.props.history.push("/teacher");
     }
@@ -32,7 +32,7 @@ class Login extends React.Component {
   };
 
   render() {
-    this.whenTeacherSignedIn();
+    this.programmaticNavigation();
     return (
       <div className="ui middle aligned center aligned grid login-window">
         <div className="column">

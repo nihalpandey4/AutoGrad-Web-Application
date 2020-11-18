@@ -26,10 +26,17 @@ div.item .content{
 div.item .content .ui.subheading{
     text-align:center;
     font-weight: 800;
-    color: blue;
     font-size: 1.2rem
 }
 
 div.ui.list{
     margin:4rem 0;
 }
+
+.center{
+    text-align:center;
+}
+
+div.fields {
+    justify-content:space-between;
+} 

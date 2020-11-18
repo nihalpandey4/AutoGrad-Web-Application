@@ -16,11 +16,11 @@ class New extends React.Component {
         this.setState({list:temp});
     }
 
-    renderNumberInput =({input,label})=>{
+    renderNumberInput =({input,label,type,width})=>{
         return(
-            <div className="three wide field">
+            <div className={`${width} wide field center`}>
                 <label>{label}</label>
-                <input {...input} type="number" required />
+                <input className="field" {...input} type={type} required />
             </div>
         );
     }
@@ -34,6 +34,7 @@ class New extends React.Component {
         request.testId = testId;
         request.timeLimit =formValues.timeLimit;
         request.wordLimit = formValues.wordLimit;
+        request.topic = formValues.topic;
         request.qA=[];
         let i=0;
         while(formValues[`Question${i}`]){
@@ -60,9 +61,9 @@ class New extends React.Component {
                     <div className="ui hidden divider"></div>
 
                     <div className="fields">
-                            <Field name="wordLimit" label="Word Limit" component={this.renderNumberInput} />
-                            <div className="ten wide field"></div>
-                            <Field name="timeLimit" label="Time Limit(in minutes)" component={this.renderNumberInput} />
+                            <Field name="wordLimit" label="Word Limit" type="number" width="three" component={this.renderNumberInput} />
+                            <Field  name="topic" label="Topic of the Test" type="text" width="eight"  component={this.renderNumberInput} />
+                            <Field name="timeLimit" label="Time Limit(in minutes)" type="number" width="three" component={this.renderNumberInput} />
                     </div>
 
                     <div className="ui hidden divider"></div>
