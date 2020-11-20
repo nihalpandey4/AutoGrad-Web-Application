@@ -17,9 +17,10 @@ mongo = PyMongo(app)
 @app.route('/<string:uId>/<string:testId>',methods=['GET','PUT','DELETE'])
 def testscrud(uId,testId):
     if(request.method=="GET"):
-        tests=mongo.db[uId].find({"_id":testId})
-        tests= dumps(tests)
+        tests=mongo.db[uId].find_one({"_id":testId})
         print("get request")
+        tests= dumps(tests)
+        print(tests)
         return tests
     elif(request.method=="PUT"):
         tests=mongo.db[uId].find({"_id":testId})
@@ -48,7 +49,6 @@ def home(userId):
     else:
         tests=mongo.db[userId].find()
         tests= dumps(tests)
-        print("get request")
         return tests
 
 @app.route('/tests/<string:testId>',methods=['GET','POST'])

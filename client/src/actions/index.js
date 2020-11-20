@@ -10,18 +10,18 @@ import {
   GET_TEST_FOR_TEACHER,
 } from "./types";
 
-export const signIn = (userId) => {
-  return {
+export const signIn = (userId) =>(dispatch)=> {
+  dispatch({
     type: SIGN_IN,
     payload: userId,
-  };
+  });
 };
 
-export const signOut = () => {
-  history.push("/");
-  return {
+export const signOut = () => (dispatch) => {
+  dispatch({
     type: SIGN_OUT,
-  };
+  });
+  history.push("/");
 };
 
 export const createTest = (formValues) => {
@@ -42,12 +42,13 @@ export const getAllTests = (userId) => async (dispatch) => {
     type: GET_ALL_TESTS,
     payload: response.data,
   });
-  history.push("/teacher")
+  history.push("/teacher");
 };
 
 export const getTestForTeacher = (testId) => async (dispatch, getState) => {
   const userId = getState().auth.userId;
   const response = await flask.get(`/${userId}/${testId}`);
+  console.log(response.data);
   dispatch({
     type: GET_TEST_FOR_TEACHER,
     payload: response.data,
@@ -58,29 +59,31 @@ export const getTestForAssessment = (testId) => async (dispatch) => {
   const response = await flask.get(`/tests/${testId}`);
   if (response.data.message === "Error") {
     alert("Enter correct Test Id");
-  } 
-  else {
+  } else {
     dispatch({
       type: GET_TEST_FOR_ASSESSMENT,
       payload: response.data,
     });
-    history.push("/student");
+    history.push(`/student/${testId}`);
   }
 };
 
 export const deleteTest = (testId) => async (dispatch, getState) => {
-    const userId = getState().auth.userId;
-    const response = await flask.delete(`/${userId}/${testId}`);
-    dispatch({
-      type: DELETE_TEST,
-      payload: response.data,
-    });
-    history.push('/');
-  };
-  
-export const updateTest = (id, formValues) => async (dispatch, getState) => {
   const userId = getState().auth.userId;
-  const response = await flask.put(`/${userId}/${id}`, formValues);
+  const response = await flask.delete(`/${userId}/${testId}`);
+  dispatch({
+    type: DELETE_TEST,
+    payload: response.data,
+  });
+  history.push("/");
+};
+
+export const updateTest = (testId, formValues) => async (
+  dispatch,
+  getState
+) => {
+  const userId = getState().auth.userId;
+  const response = await flask.put(`/${userId}/${testId}`, formValues);
   dispatch({
     type: "UPDATE_TEST",
     payload: response.data,

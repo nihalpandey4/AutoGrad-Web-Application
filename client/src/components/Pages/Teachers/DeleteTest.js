@@ -1,28 +1,27 @@
 import React from "react";
-import Modal from "../../Modal"
+import Modal from "../../Modal";
 import { connect } from "react-redux";
 
-import {getTestForTeacher,deleteTest} from "../../../actions"
+import { getTestForTeacher, deleteTest } from "../../../actions";
 
-class StreamDelete extends React.Component {
-  renderContent = () => {
-    if (this.props.test === undefined) {
-      return "Loading ...";
-    }
-    return (
-        <React.Fragment>
-            <h5>{`Topic :  "${this.props.test.topic}" `}</h5> 
-            <h5>{`Test id :  ${this.props.test.testId} ?`}</h5>
-        </React.Fragment>
-    )
-  };
-
+class TestDelete extends React.Component {
   componentDidMount() {
     this.props.getTestForTeacher(this.props.match.params.id);
   }
 
+  renderContent = () => {
+    if (!this.props.test) {
+      return "Loading ...";
+    }
+    return (
+      <React.Fragment>
+        <h5>{`Topic :  "${this.props.test.topic}" `}</h5>
+        <h5>{`Test id :  ${this.props.test.testId} ?`}</h5>
+      </React.Fragment>
+    );
+  };
+
   onActionClicked = () => {
-    //console.log(this.props.test)
     this.props.deleteTest(this.props.test.testId);
   };
 
@@ -45,6 +44,6 @@ const mapStateToProps = (state, ownProps) => {
   return { test: state.allTests[ownProps.match.params.id] };
 };
 
-export default connect(mapStateToProps, { getTestForTeacher,deleteTest})(
-  StreamDelete
+export default connect(mapStateToProps, { getTestForTeacher, deleteTest })(
+  TestDelete
 );
