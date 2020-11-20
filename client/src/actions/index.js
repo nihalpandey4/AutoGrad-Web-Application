@@ -48,7 +48,6 @@ export const getAllTests = (userId) => async (dispatch) => {
 export const getTestForTeacher = (testId) => async (dispatch, getState) => {
   const userId = getState().auth.userId;
   const response = await flask.get(`/${userId}/${testId}`);
-  console.log(response.data);
   dispatch({
     type: GET_TEST_FOR_TEACHER,
     payload: response.data,

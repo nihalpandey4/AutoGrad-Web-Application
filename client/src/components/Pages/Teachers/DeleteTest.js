@@ -1,12 +1,20 @@
 import React from "react";
-import Modal from "../../Modal";
 import { connect } from "react-redux";
 
+import GoogleOAuth from "../../GoogleOAuth";
+import Modal from "../../Modal";
 import { getTestForTeacher, deleteTest } from "../../../actions";
 
 class TestDelete extends React.Component {
-  componentDidMount() {
-    this.props.getTestForTeacher(this.props.match.params.id);
+
+  state = {currUserId : null};
+  //this state is just created to rerender this component till the user is verified
+
+  componentDidUpdate=()=>{
+    if(this.props.userId!==this.state.curr){
+      this.setState({curr:this.props.userId})
+      this.props.getTestForTeacher(this.props.match.params.id);
+    }
   }
 
   renderContent = () => {
@@ -35,13 +43,19 @@ class TestDelete extends React.Component {
           actionText="Delete"
           onActionClicked={this.onActionClicked}
         />
+        <div>
+          <GoogleOAuth />
+        </div>
       </div>
     );
   };
 }
 
 const mapStateToProps = (state, ownProps) => {
-  return { test: state.allTests[ownProps.match.params.id] };
+  return {
+    test: state.allTests[ownProps.match.params.id],
+    userId: state.auth.userId,
+  };
 };
 
 export default connect(mapStateToProps, { getTestForTeacher, deleteTest })(

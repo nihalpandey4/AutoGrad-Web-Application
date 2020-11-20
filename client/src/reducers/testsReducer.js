@@ -10,7 +10,12 @@ import {
 const testsReducer=(state={},action)=>{
     switch(action.type){
         case GET_TEST_FOR_TEACHER:
-            return {...state,[action.payload.testId]:action.payload};
+            if(action.payload){
+                return {...state,[action.payload.testId]:action.payload};
+            }
+            else {
+                return state;
+            }
         case CREATE_TEST:
             return {...state,[action.payload.testId]:action.payload};
         case UPDATE_TEST:
