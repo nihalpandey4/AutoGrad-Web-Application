@@ -20,7 +20,11 @@ class List extends React.Component {
     const renderItems = Object.keys(this.props.items).map((id) => {
       return <ListItem content={this.renderContent(this.props.items[id])} id ={id} key={id} />;
     });
-    return <div className="ui middle aligned divided list">{renderItems}</div>;
+    return(
+       <div className="ui relaxed middle aligned celled list">
+        {renderItems}
+      </div>
+    )
   }
 }
 

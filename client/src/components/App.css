@@ -19,6 +19,7 @@ div.item{
 }
 
 div.item .content{
+    margin-top:0.7rem;
     display: flex;
     justify-content:space-around;
 }

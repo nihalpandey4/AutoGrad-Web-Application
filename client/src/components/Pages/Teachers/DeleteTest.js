@@ -1,21 +1,21 @@
 import React from "react";
 import { connect } from "react-redux";
+import {Link} from "react-router-dom";
 
 import Header from "../../Header";
 import Modal from "../../Modal";
 import { getTestForTeacher, deleteTest } from "../../../actions";
 
 class TestDelete extends React.Component {
-
-  state = {currUserId : null};
+  state = { currUserId: null };
   //this state is just created to rerender this component till the user is verified
 
-  componentDidUpdate=()=>{
-    if(this.props.userId!==this.state.curr){
-      this.setState({curr:this.props.userId})
+  componentDidUpdate = () => {
+    if (this.props.userId !== this.state.curr) {
+      this.setState({ curr: this.props.userId });
       this.props.getTestForTeacher(this.props.match.params.id);
     }
-  }
+  };
 
   renderContent = () => {
     if (!this.props.test) {
@@ -29,9 +29,18 @@ class TestDelete extends React.Component {
     );
   };
 
-  onActionClicked = () => {
-    this.props.deleteTest(this.props.test.testId);
-  };
+  renderActions=()=>{
+    return(
+      <div className="actions" onClick={()=>this.props.deleteTest(this.props.test.testId)}>
+        <button className="ui button red">
+            Delete
+        </button>
+        <Link to="/" className="ui button">
+            Cancel
+        </Link>
+      </div>
+    )
+  }
 
   render = () => {
     return (
@@ -39,9 +48,7 @@ class TestDelete extends React.Component {
         <Modal
           header="Are you sure you want to delete this test ?"
           content={this.renderContent()}
-          cancelUrl="/"
-          actionText="Delete"
-          onActionClicked={this.onActionClicked}
+          actions = {this.renderActions()}
         />
         <div>
           <Header />
