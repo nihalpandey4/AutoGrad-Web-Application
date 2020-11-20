@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import GoogleOAuth from "../../GoogleOAuth";
+import Header from "../../Header";
 import Modal from "../../Modal";
 import { getTestForTeacher, deleteTest } from "../../../actions";
 
@@ -44,7 +44,7 @@ class TestDelete extends React.Component {
           onActionClicked={this.onActionClicked}
         />
         <div>
-          <GoogleOAuth />
+          <Header />
         </div>
       </div>
     );
