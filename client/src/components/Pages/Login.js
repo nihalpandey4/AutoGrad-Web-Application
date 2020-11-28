@@ -2,10 +2,14 @@ import React from "react";
 import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 
-import {getTestForAssessment} from "../../actions/index"
+import {getTestForAssessment,renderProgrammaticNav} from "../../actions/index"
 import GoogleOAuth from "../GoogleOAuth";
 
 class Login extends React.Component {
+  componentDidUpdate=()=>{
+    this.props.renderProgrammaticNav(this.props.isSignedIn);
+  }
+
   handleSubmit = (formValues) => {
     this.props.getTestForAssessment(formValues.testId)
   };
@@ -32,7 +36,6 @@ class Login extends React.Component {
   };
 
   render() {
-    this.renderProgrammatic();
     return (
       <div className="ui middle aligned center aligned grid login-window">
         <div className="column">
@@ -76,5 +79,5 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps,{
-  getTestForAssessment
+  getTestForAssessment,renderProgrammaticNav
 })(wrappedForm);

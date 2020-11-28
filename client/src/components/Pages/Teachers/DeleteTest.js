@@ -32,8 +32,8 @@ class TestDelete extends React.Component {
 
   renderActions=()=>{
     return(
-      <div className="actions" onClick={()=>this.props.deleteTest(this.props.test.testId)}>
-        <button className="ui button red">
+      <div className="actions" >
+        <button className="ui button red" onClick={()=>this.props.deleteTest(this.props.test.testId)}>
             Delete
         </button>
         <Link to="/" className="ui button">

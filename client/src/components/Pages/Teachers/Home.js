@@ -5,8 +5,11 @@ import { getAllTests } from "../../../actions";
 
 import Header from "../../Header";
 import List from "../../List";
+import "./home.css"
 
 class Home extends React.Component {
+  state = {render:false}
+
   componentDidMount = () => {
     this.props.getAllTests(this.props.userId);
   };
@@ -51,7 +54,7 @@ class Home extends React.Component {
           </h2>
           <List name="My tests" items={this.props.tests} content = {this.renderContent} rightContent = {this.renderRightContent} />
           <Link to="/teacher/new" className="circular ui button primary">
-            <h1>+</h1>
+            <h1 className="newTest"></h1>
           </Link>
         </div>
       </>

@@ -10,6 +10,16 @@ import {
   GET_TEST_FOR_TEACHER,
 } from "./types";
 
+export const renderProgrammaticNav = () =>async(dispatch,getState)=>{
+  const isSignedIn = await getState().auth.isSignedIn;
+  if(isSignedIn===true){
+    history.push("/teacher");
+  }
+  dispatch({
+    type:"NAV"
+  })
+}
+
 export const signIn = (userId) =>(dispatch)=> {
   dispatch({
     type: SIGN_IN,

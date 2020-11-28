@@ -2,7 +2,6 @@ import React from "react"
 import {connect} from "react-redux";
 
 import {signIn,signOut} from "../actions";
-import Loader from "./Loader";
 
 class GoogleOAuth extends React.Component{
     componentDidMount(){
@@ -29,7 +28,11 @@ class GoogleOAuth extends React.Component{
 
     signButton = () =>{
         if(this.props.isSignedIn===null){
-            return <Loader />
+            return (
+                <button className="ui button">
+                    Loading ....
+                </button>
+            )
         }
         else if (this.props.isSignedIn===true){
             return (

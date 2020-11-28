@@ -1,0 +1,7 @@
+h1.newTest::after{
+    content:"+";
+}
+
+h1.newTest:hover::after{
+    content:" Create new Test";
+}
