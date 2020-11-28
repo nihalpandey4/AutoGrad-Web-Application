@@ -52,7 +52,7 @@ class Home extends React.Component {
             <i className="circular paste icon"></i>
             Tests created by you -
           </h2>
-          <List name="My tests" items={this.props.tests} content = {this.renderContent} rightContent = {this.renderRightContent} />
+          <List name="My tests" items={this.props.tests} content = {this.renderContent} rightContent = {this.renderRightContent} type= "justified" />
           <Link to="/teacher/new" className="circular ui button primary">
             <h1 className="newTest"></h1>
           </Link>

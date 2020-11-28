@@ -6,6 +6,9 @@ import {getTestForAssessment,renderProgrammaticNav} from "../../actions/index"
 import GoogleOAuth from "../GoogleOAuth";
 
 class Login extends React.Component {
+  componentDidMount=()=> {
+    this.props.renderProgrammaticNav(this.props.isSignedIn);
+  }
   componentDidUpdate=()=>{
     this.props.renderProgrammaticNav(this.props.isSignedIn);
   }

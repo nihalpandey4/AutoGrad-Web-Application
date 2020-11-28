@@ -1,6 +1,7 @@
 import React from "react";
 
 import ListItem from "./ListItem";
+import "./list.css"
 
 class List extends React.Component {
   render() {
@@ -11,6 +12,7 @@ class List extends React.Component {
           rightContent ={this.props.rightContent(this.props.items[id])}
           id={id}
           key={id}
+          type = {this.props.type}
         />
       );
     });

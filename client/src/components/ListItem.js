@@ -5,7 +5,7 @@ class Listitems extends  React.Component{
 
     render(){
         return(
-            <div className="item">
+            <div className={`item ${this.props.type}`}>
                 <div className="right floated content">
                     {this.props.rightContent}
                 </div>

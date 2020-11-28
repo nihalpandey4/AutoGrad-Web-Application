@@ -14,26 +14,6 @@ div.ui.stacked.segment{
     padding :2rem;
 }
 
-div.item{
-    justify-content:space-around;
-}
-
-div.item .content{
-    margin-top:0.7rem;
-    display: flex;
-    justify-content:space-around;
-}
-
-div.item .content .ui.subheading{
-    text-align:center;
-    font-weight: 800;
-    font-size: 1.2rem
-}
-
-div.ui.list{
-    margin:4rem 0;
-}
-
 .center{
     text-align:center;
 }
