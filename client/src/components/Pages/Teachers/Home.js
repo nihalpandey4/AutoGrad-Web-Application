@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { getAllTests } from "../../../actions";
 
-import Header from "../../Header";
+import Navbar from "../../NavBar";
 import List from "../../List";
 import "./home.css"
 
@@ -46,7 +46,7 @@ class Home extends React.Component {
   render() {
     return (
       <>
-        <Header />
+        <Navbar />
         <div style={{ textAlign: "center" }}>
           <h2 className="ui center aligned icon header">
             <i className="circular paste icon"></i>

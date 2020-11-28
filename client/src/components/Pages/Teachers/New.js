@@ -1,5 +1,5 @@
 import React from 'react'
-import Header from "../../Header";
+import NavBar from "../../NavBar";
 import {Field,reduxForm} from "redux-form";
 import {connect} from "react-redux";
 import {v4 as uuidv4} from "uuid";
@@ -54,7 +54,7 @@ class New extends React.Component {
         })
         return (
             <div > 
-                <Header activeElement = {"New Test"} to="/teacher/new"/>
+                <NavBar activeElement = {"New Test"} to="/teacher/new"/>
                 <h4 style={{textAlign:"center"}}>All Fields are necessary</h4>
                 <form className="ui form" onSubmit={this.props.handleSubmit(this.onSubmit)}>
 

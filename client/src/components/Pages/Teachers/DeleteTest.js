@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import {Link} from "react-router-dom";
 
-import Header from "../../Header";
+import NavBar from "../../NavBar";
 import Modal from "../../Modal";
 import { getTestForTeacher, deleteTest } from "../../../actions";
 import Loader from "../../Loader"
@@ -52,7 +52,7 @@ class TestDelete extends React.Component {
           actions = {this.renderActions()}
         />
         <div>
-          <Header />
+          <NavBar />
         </div>
       </div>
     );
