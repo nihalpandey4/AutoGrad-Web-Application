@@ -11,6 +11,35 @@ class Home extends React.Component {
     this.props.getAllTests(this.props.userId);
   };
 
+  renderContent = (item) => {
+    return (
+      <React.Fragment>
+        <div>
+          <span className="ui subheading">Topic = {item.topic}</span>
+        </div>
+        <div>
+          <span className="ui subheading">Test Id = {item.testId}</span>
+        </div>
+      </React.Fragment>
+    );
+  };
+
+  renderRightContent = (item) => {
+    return (
+      <React.Fragment>
+        <div className="ui button">Edit</div>
+        <button
+          className="ui blue button"
+          onClick={() => navigator.clipboard.writeText(item.testId)}>
+          Share
+        </button>
+        <Link to={`teacher/delete/${item.testId}`} className="ui red button">
+          Delete
+        </Link>
+      </React.Fragment>
+    );
+  };
+
   render() {
     return (
       <>
@@ -20,7 +49,7 @@ class Home extends React.Component {
             <i className="circular paste icon"></i>
             Tests created by you -
           </h2>
-          <List name="My tests" items={this.props.tests} />
+          <List name="My tests" items={this.props.tests} content = {this.renderContent} rightContent = {this.renderRightContent} />
           <Link to="/teacher/new" className="circular ui button primary">
             <h1>+</h1>
           </Link>

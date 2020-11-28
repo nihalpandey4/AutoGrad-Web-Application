@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 import Header from "../../Header";
 import Modal from "../../Modal";
 import { getTestForTeacher, deleteTest } from "../../../actions";
+import Loader from "../../Loader"
 
 class TestDelete extends React.Component {
   state = { currUserId: null };
@@ -19,7 +20,7 @@ class TestDelete extends React.Component {
 
   renderContent = () => {
     if (!this.props.test) {
-      return "Loading ...";
+      return <Loader />
     }
     return (
       <React.Fragment>
