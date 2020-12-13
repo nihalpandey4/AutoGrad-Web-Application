@@ -2,6 +2,8 @@ import React from "react";
 import {connect} from "react-redux";
 
 import {getTestForAssessment} from "../../../actions"
+import "./answerSheet.css";
+import Header from "../../Header";
 
 class AnswerSheet extends React.Component{
     componentDidMount=()=>{
@@ -11,7 +13,9 @@ class AnswerSheet extends React.Component{
     render(){
         console.log(this.props.testPaper);
         return(
-            <div>Answer sheet</div>
+            <div className= "answerSheet">
+                <Header time={this.props.testPaper.timeLimit} />
+            </div>
         )
     }
 }
