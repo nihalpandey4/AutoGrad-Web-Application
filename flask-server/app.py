@@ -11,7 +11,7 @@ cors = CORS(app,resources = {
     }
 })
 
-app.config['MONGO_URI']="mongodb://localhost:27017/autoGrad"
+app.config['MONGO_URI']="mongodb+srv://nihal:panasonic@cluster0.fwayb.mongodb.net/records?retryWrites=true&w=majority"
 mongo = PyMongo(app)
 
 @app.route('/<string:uId>/<string:testId>',methods=['GET','PUT','DELETE'])
