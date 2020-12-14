@@ -1,12 +1,12 @@
 import React from "react";
 import { Timer } from "react-countdown-clock-timer";
 
-import "./header.css";
+import "./AssessmentHeader.css";
 
 const Header = (props) => {
   return (
     <div className="customHeader">
-      <div className="ui header spacebetween">
+      <div className="ui header spacebetween segment">
         <div>Max Marks : 20</div>
         <div>{props.testPaper.topic}</div>
         <div style={{ display: "flex" }}>
@@ -27,7 +27,14 @@ const Header = (props) => {
 
       <div className="ui hidden divider"></div>
 
-      <div className="ui form"></div>
+      <div className="ui spacebetween segment">
+        <div className="textWithbutton"> Attendee's Name : {props.student.name} </div>
+        <div className="textWithbutton"> Attendee's Roll no : {props.student.rollno} </div>
+        <div >
+          <button className="ui button red">Submit test</button>
+        </div>
+      </div>
+      
     </div>
   );
 };

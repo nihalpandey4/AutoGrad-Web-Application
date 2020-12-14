@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import { getTestForAssessment } from "../../../actions";
 import "./answerSheet.css";
-import Header from "../../Header";
+import AssessmentHeader from "../../AssessmentHeader";
 import Modal from "../../Modal";
 import Loader from "../../Loader";
 
@@ -119,7 +119,7 @@ class AnswerSheet extends React.Component {
       );
     } else {
       return (
-        <Header testPaper={this.state.testPaper} student={this.state.student} />
+        <AssessmentHeader testPaper={this.state.testPaper} student={this.state.student} />
       );
     }
   };
