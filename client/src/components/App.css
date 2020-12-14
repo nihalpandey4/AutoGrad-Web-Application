@@ -21,3 +21,12 @@ div.ui.stacked.segment{
 div.fields {
     justify-content:space-between;
 } 
+
+.customui .row{
+    display:flex;
+    justify-content:space-around;
+}
+
+.customui .row .column{
+    width: 350px;
+}

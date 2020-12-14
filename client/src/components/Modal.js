@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import history from "./history";
+import "./modal.css";
 
 const Modal = (props) => {
   return ReactDOM.createPortal(
