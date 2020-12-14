@@ -30,3 +30,8 @@ div.fields {
 .customui .row .column{
     width: 350px;
 }
+
+.spacebetween{
+    display: flex;
+    justify-content:space-between;
+}
