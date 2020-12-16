@@ -98,3 +98,11 @@ export const updateTest = (testId, formValues) => async (
     payload: response.data,
   });
 };
+
+export const submitTest = (testId, formValues) => async dispatch=> {
+  const response = await flask.put(`/${testId}`, formValues);
+  dispatch({
+    type: "SUBMIT_TEST",
+    payload: response.data,
+  });
+};
