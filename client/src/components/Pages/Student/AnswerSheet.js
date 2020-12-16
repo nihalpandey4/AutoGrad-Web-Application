@@ -7,6 +7,7 @@ import "./answerSheet.css";
 import AssessmentHeader from "../../AssessmentHeader";
 import Modal from "../../Modal";
 import Loader from "../../Loader";
+import AssessmentForm from "../../AssessmentForm";
 
 class AnswerSheet extends React.Component {
   state = {
@@ -24,7 +25,7 @@ class AnswerSheet extends React.Component {
 
   componentDidUpdate = () => {
     if (this.state.testPaper === null) {
-      this.setState({ testPaper: this.props.testPaper });
+      this.setState({ testPaper: {...this.props.testPaper,students:{}} });
     }
   };
 
@@ -85,11 +86,14 @@ class AnswerSheet extends React.Component {
   };
 
   startTest = async (e) => {
-    if(e){
-        e.preventDefault();
+    if (e) {
+      e.preventDefault();
+    }
+    if(this.state.testPaper.students[this.state.student.rollno]){
+      alert("Already attempted by this user");
+      return;
     }
     await this.setState({ student: { ...this.state.student, consent: "yes" } });
-    console.log(this.state.student);
   };
 
   renderActions = () => {
@@ -103,7 +107,16 @@ class AnswerSheet extends React.Component {
         </Link>
       </div>
     );
-  };
+  }
+
+  onSubmitTest =async (formValues)=>{
+    let students = this.state.testPaper.students;
+    const rollno = this.state.student.rollno;
+    students[rollno] = {...this.state.student,responses:formValues};
+    const count = this.state.testPaper.attemptedBy;
+    await this.setState({testPaper:{...this.state.testPaper,attemptedBy:count+1,students:students}});
+    console.log(this.state.testPaper);
+  }
 
   renderComponent = () => {
     if (this.state.testPaper === null) {
@@ -119,7 +132,18 @@ class AnswerSheet extends React.Component {
       );
     } else {
       return (
-        <AssessmentHeader testPaper={this.state.testPaper} student={this.state.student} />
+        <>
+          <AssessmentHeader
+            testPaper={this.state.testPaper}
+            student={this.state.student}
+          />
+          <div className="ui hidden divider"></div>
+          <AssessmentForm
+            qA={this.state.testPaper.qA}
+            wordLimit={Number(this.state.testPaper.wordLimit)}
+            onSubmitTest={this.onSubmitTest}
+          />
+        </>
       );
     }
   };

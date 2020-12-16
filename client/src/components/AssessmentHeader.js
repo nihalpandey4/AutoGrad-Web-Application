@@ -30,9 +30,6 @@ const Header = (props) => {
       <div className="ui spacebetween segment">
         <div className="textWithbutton"> Attendee's Name : {props.student.name} </div>
         <div className="textWithbutton"> Attendee's Roll no : {props.student.rollno} </div>
-        <div >
-          <button className="ui button red">Submit test</button>
-        </div>
       </div>
       
     </div>
