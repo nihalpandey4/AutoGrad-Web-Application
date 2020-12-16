@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { getTestForAssessment } from "../../../actions";
+import { getTestForAssessment,submitTest } from "../../../actions";
 import "./answerSheet.css";
 import AssessmentHeader from "../../AssessmentHeader";
 import Modal from "../../Modal";
@@ -115,7 +115,8 @@ class AnswerSheet extends React.Component {
     students[rollno] = {...this.state.student,responses:formValues};
     const count = this.state.testPaper.attemptedBy;
     await this.setState({testPaper:{...this.state.testPaper,attemptedBy:count+1,students:students}});
-    console.log(this.state.testPaper);
+    const response = await this.props.submitTest(this.state.testPaper.testId,this.state.testPaper);
+    console.log(response);
   }
 
   renderComponent = () => {
@@ -157,4 +158,4 @@ const mapStateToProps = (state) => {
   return { testPaper: state.testPaper };
 };
 
-export default connect(mapStateToProps, { getTestForAssessment })(AnswerSheet);
+export default connect(mapStateToProps, { getTestForAssessment,submitTest })(AnswerSheet);
