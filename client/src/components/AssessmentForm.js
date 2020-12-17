@@ -21,10 +21,13 @@ class AssessmentForm extends React.Component {
     await this.setState({ responses: responses });
   };
 
-  handleSubmit=(e)=>{
+  handleSubmit =async (e) => {
+    if (e) {
       e.preventDefault();
-      this.props.onSubmitTest(this.state.responses);
-  }
+    }
+    await this.props.saveResponses(this.state.responses);
+    this.props.onSubmitTest();
+  };
 
   render() {
     const renderItems = this.props.qA.map((item, index) => {
@@ -42,14 +45,20 @@ class AssessmentForm extends React.Component {
     });
     return (
       <div className="AssessmentForm">
-          <div className="ui segment">
-        <form className="ui form">
-          {renderItems}
-          <div className="ui hidden divider"></div>
+        <div className="ui segment">
+          <form className="ui form">
+            {renderItems}
+            <div className="ui hidden divider"></div>
+          </form>
           <div className="center">
-            <button className="ui button large red" onClick={(e)=>{this.handleSubmit(e)}}>Submit test</button>
+            <button
+              className="ui button large red"
+              onClick={(e) => {
+                this.handleSubmit(e);
+              }}>
+              Submit test
+            </button>
           </div>
-        </form>
         </div>
       </div>
     );

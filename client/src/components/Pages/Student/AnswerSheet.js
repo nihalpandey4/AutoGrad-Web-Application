@@ -113,12 +113,11 @@ class AnswerSheet extends React.Component {
     );
   };
 
-  onSubmitTest = async (formValues) => {
-    console.log(formValues);
+  saveResponses = async(formValues)=>{
     let students = this.state.testPaper.students;
     const rollno = this.state.student.rollno;
     students[rollno] = { ...this.state.student, responses: formValues };
-    const count = this.state.testPaper.attemptedBy;
+    const count = Object.keys(students).length;
     await this.setState({
       testPaper: {
         ...this.state.testPaper,
@@ -126,6 +125,9 @@ class AnswerSheet extends React.Component {
         students: students,
       },
     });
+  }
+
+  onSubmitTest = ()=> {
     this.props.submitTest(this.state.testPaper.testId, this.state.testPaper);
   };
 
@@ -153,6 +155,7 @@ class AnswerSheet extends React.Component {
             qA={this.state.testPaper.qA}
             wordLimit={Number(this.state.testPaper.wordLimit)}
             onSubmitTest={this.onSubmitTest}
+            saveResponses={this.saveResponses}
           />
         </>
       );
