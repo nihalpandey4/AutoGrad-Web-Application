@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { getTestForAssessment,submitTest } from "../../../actions";
+import { getTestForAssessment, submitTest } from "../../../actions";
 import "./answerSheet.css";
 import AssessmentHeader from "../../AssessmentHeader";
 import Modal from "../../Modal";
@@ -25,7 +25,7 @@ class AnswerSheet extends React.Component {
 
   componentDidUpdate = () => {
     if (this.state.testPaper === null) {
-      this.setState({ testPaper: {...this.props.testPaper,students:{}} });
+      this.setState({ testPaper: { ...this.props.testPaper } });
     }
   };
 
@@ -89,9 +89,13 @@ class AnswerSheet extends React.Component {
     if (e) {
       e.preventDefault();
     }
-    if(this.state.testPaper.students[this.state.student.rollno]){
-      alert("Already attempted by this user");
-      return;
+    try {
+      if (this.state.testPaper.students[Number(this.state.student.rollno)]) {
+        alert("Already attempted by this user");
+        return;
+      }
+    } catch (e) {
+      this.setState({ testPaper: { ...this.state.testPaper, students: {} } });
     }
     await this.setState({ student: { ...this.state.student, consent: "yes" } });
   };
@@ -107,17 +111,23 @@ class AnswerSheet extends React.Component {
         </Link>
       </div>
     );
-  }
+  };
 
-  onSubmitTest =async (formValues)=>{
+  onSubmitTest = async (formValues) => {
+    console.log(formValues);
     let students = this.state.testPaper.students;
     const rollno = this.state.student.rollno;
-    students[rollno] = {...this.state.student,responses:formValues};
+    students[rollno] = { ...this.state.student, responses: formValues };
     const count = this.state.testPaper.attemptedBy;
-    await this.setState({testPaper:{...this.state.testPaper,attemptedBy:count+1,students:students}});
-    const response = await this.props.submitTest(this.state.testPaper.testId,this.state.testPaper);
-    console.log(response);
-  }
+    await this.setState({
+      testPaper: {
+        ...this.state.testPaper,
+        attemptedBy: count + 1,
+        students: students,
+      },
+    });
+    this.props.submitTest(this.state.testPaper.testId, this.state.testPaper);
+  };
 
   renderComponent = () => {
     if (this.state.testPaper === null) {
@@ -158,4 +168,6 @@ const mapStateToProps = (state) => {
   return { testPaper: state.testPaper };
 };
 
-export default connect(mapStateToProps, { getTestForAssessment,submitTest })(AnswerSheet);
+export default connect(mapStateToProps, { getTestForAssessment, submitTest })(
+  AnswerSheet
+);

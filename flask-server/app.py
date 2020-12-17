@@ -51,12 +51,10 @@ def home(userId):
         tests= dumps(tests)
         return tests
 
-@app.route('/tests/<string:testId>',methods=['GET','POST'])
+@app.route('/tests/<string:testId>',methods=['GET','POST','PUT'])
 def getNewTest(testId):
-    if(request.method=='POST'):
-        some_request=request.get_json()
-        return jsonify({"you_sent":some_request})
-    else:
+    method = request.method
+    if(method=="GET"):
         query={}
         query["_id"]=testId
         response  = mongo.db.tests.find_one(query)
@@ -67,7 +65,22 @@ def getNewTest(testId):
         document={}
         document = mongo.db[userId].find_one(query)
         document= dumps(document)
-        return document
+        return document  
+    elif(method=="PUT"):
+        requestBody=request.get_json()
+        query={}
+        query["_id"]=testId
+        response  = mongo.db.tests.find_one(query)
+        if(response==None):
+            return jsonify({'message':"Error"})
+        userId = response['userId']
+        document={}
+        document = mongo.db[userId].update(query,requestBody,True)
+        document =dumps(document)
+        return jsonify(document)
+    else:
+        return jsonify({"message":"undefined request"})
+
 
 if __name__ =="__main__":
     app.run(port=3001,debug=True)
