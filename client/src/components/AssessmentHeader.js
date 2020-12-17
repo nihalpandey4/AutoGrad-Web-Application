@@ -7,7 +7,7 @@ const Header = (props) => {
   return (
     <div className="customHeader">
       <div className="ui header spacebetween segment">
-        <div>Max Marks : 20</div>
+        <div>Max Marks : {props.testPaper.maxMarks}</div>
         <div>{props.testPaper.topic}</div>
         <div style={{ display: "flex" }}>
           Time Remaining : &nbsp;

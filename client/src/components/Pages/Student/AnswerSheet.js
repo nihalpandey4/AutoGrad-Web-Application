@@ -43,8 +43,8 @@ class AnswerSheet extends React.Component {
           <div className="column">{this.state.testPaper.topic}</div>
         </div>
         <div className="row">
-          <div className="column">Time Limit :</div>
-          <div className="column">{this.state.testPaper.timeLimit} minutes</div>
+          <div className="column">Time Limit : {this.state.testPaper.timeLimit} minutes</div>
+          <div className="column">Maximum Marks : {this.state.testPaper.maxMarks}</div>
         </div>
       </div>
     );
@@ -121,7 +121,7 @@ class AnswerSheet extends React.Component {
     await this.setState({
       testPaper: {
         ...this.state.testPaper,
-        attemptedBy: count + 1,
+        attemptedBy: count,
         students: students,
       },
     });

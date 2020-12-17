@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { getAllTests } from "../../../actions";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import Navbar from "../../NavBar";
 import List from "../../List";
@@ -13,6 +15,8 @@ class Home extends React.Component {
   componentDidMount = () => {
     this.props.getAllTests(this.props.userId);
   };
+
+  copiedTextAlert = ()=> toast.success("Test ID copied");
 
   renderContent = (item) => {
     return (
@@ -27,13 +31,18 @@ class Home extends React.Component {
     );
   };
 
+  copyTestId = (testId)=>{
+    navigator.clipboard.writeText(testId)
+    this.copiedTextAlert();
+  }
+
   renderRightContent = (item) => {
     return (
       <React.Fragment>
         <div className="ui button">Edit</div>
         <button
           className="ui blue button"
-          onClick={() => navigator.clipboard.writeText(item.testId)}>
+          onClick={() => this.copyTestId(item.testId)}>
           Share
         </button>
         <Link to={`teacher/delete/${item.testId}`} className="ui red button">
@@ -48,6 +57,7 @@ class Home extends React.Component {
       <>
         <Navbar />
         <div style={{ textAlign: "center" }}>
+          <ToastContainer autoClose={3000} />
           <h2 className="ui center aligned icon header">
             <i className="circular paste icon"></i>
             Tests created by you -

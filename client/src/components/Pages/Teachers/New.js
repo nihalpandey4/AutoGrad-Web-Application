@@ -26,6 +26,7 @@ class New extends React.Component {
     }
 
     onSubmit=(formValues)=>{
+        let maxMarks=0 ;
         const testId=uuidv4();
         const userId = this.props.userId;
         let request={};
@@ -42,9 +43,11 @@ class New extends React.Component {
             sample[`Question`]=formValues[`Question${i}`];
             sample[`CorrectAnswer`]=formValues[`CorrectAnswer${i}`];
             sample[`MaxMarks`]=formValues[`MaxMarks${i}`];
+            maxMarks = maxMarks + Number(sample[`MaxMarks`])
             request.qA.push(sample);
             i=i+1;
         }
+        request["maxMarks"] =maxMarks;
         this.props.createTest(request);
     }
 
@@ -91,10 +94,14 @@ class New extends React.Component {
     }
 }
 
+const mapStateToProps = (state) =>{
+    return {userId:state.auth.userId}
+}
+
 const wrappedForm= reduxForm({
     form:"createNewTest"
 })(New);
 
-export default connect(null,{
+export default connect(mapStateToProps,{
     createTest
 })(wrappedForm)
