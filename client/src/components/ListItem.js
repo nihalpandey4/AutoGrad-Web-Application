@@ -12,6 +12,7 @@ class Listitems extends  React.Component{
                 <div className="content">
                     {this.props.content}
                 </div>
+                {this.props.renderTestStatus}
             </div>
         ) 
     }

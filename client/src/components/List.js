@@ -17,7 +17,10 @@ class List extends React.Component {
       );
     });
     return (
-      <div className="ui relaxed middle aligned celled list">{renderItems}</div>
+      <React.Fragment>
+        {this.props.header}
+        <div className={`ui relaxed middle aligned celled list`}>{renderItems}</div>
+      </React.Fragment>
     );
   }
 }

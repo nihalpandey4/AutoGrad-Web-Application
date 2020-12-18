@@ -1,7 +1,8 @@
 div.justified.item .content{
     margin-top:0.7rem;
     display: flex;
-    justify-content:space-around;
+    justify-content:space-between;
+    margin-left:1rem;
 }
 
 div.item .content .ui.subheading{
