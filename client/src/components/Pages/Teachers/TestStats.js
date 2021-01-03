@@ -19,17 +19,20 @@ class TestStats extends React.Component {
   };
 
   renderListContent = (student) => {
-    console.log(student);
+    let status="Checked";
+    if(student.status==="Evaluate"){
+      status="Unchecked";
+    }
     return (
       <React.Fragment>
         <div>
           <span className="ui subheading">Roll No = {student.rollno}</span>
         </div>
         <div>
-          <span className="ui subheading">Status = Unchecked</span>
+          <span className="ui subheading">Status = {status} </span>
         </div>
         <div>
-          <span className="ui subheading">Marks = N/A</span>
+          <span className="ui subheading">Marks = {student.marksObtained}</span>
         </div>
       </React.Fragment>
     );
@@ -38,7 +41,7 @@ class TestStats extends React.Component {
   renderListRightContent=(student)=>{
     return (
       <React.Fragment>
-        <button className="ui blue button">Evaluate</button>
+        <button className="ui blue button">{student.status}</button>
       </React.Fragment>
     )
   }
@@ -48,6 +51,7 @@ class TestStats extends React.Component {
       <div className="customui">
         <div className="row">
           <div className="column">Topic : {this.props.testPaper.topic}</div>
+          <div className="column">Max Marks : {this.props.testPaper.maxMarks}</div>
           <div className="column">
             Attempted by - {" " + this.props.testPaper.attemptedBy} student(s)
           </div>
