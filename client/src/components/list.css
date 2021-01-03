@@ -14,3 +14,7 @@ div.item .content .ui.subheading{
 div.ui.list{
     margin:4rem 0;
 }
+
+.ui.list .content{
+    margin-right: 180px;
+}
