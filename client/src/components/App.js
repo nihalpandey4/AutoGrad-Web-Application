@@ -8,7 +8,8 @@ import history from "./history";
 import NewTest from "../components/Pages/Teachers/New";
 import AnswerSheet from "../components/Pages/Student/AnswerSheet";
 import DeleteTest from "../components/Pages/Teachers/DeleteTest";
-import TestStats from "../components/Pages/Teachers/TestStats"
+import TestStats from "./Pages/Teachers/TestStats"
+import EvaluationPage from "./Pages/Teachers/Evaluation";
 
 class App extends React.Component {
   render = () => {
@@ -18,6 +19,7 @@ class App extends React.Component {
           <Switch>
             <Route path="/" exact component={Login} />
             <Route path="/teacher" exact component={TeacherHome} />
+            <Route path="/teacher/test/evaluate/:id" component={EvaluationPage} /> 
             <Route path="/teacher/new" exact component={NewTest} />
             <Route path ="/teacher/:id" exact component ={TestStats} />
             <Route path="/teacher/delete/:id" component={DeleteTest} />

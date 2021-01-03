@@ -19,9 +19,9 @@ class TestStats extends React.Component {
   };
 
   renderListContent = (student) => {
-    let status="Checked";
-    if(student.status==="Evaluate"){
-      status="Unchecked";
+    let status = "Checked";
+    if (student.status === "Evaluate") {
+      status = "Unchecked";
     }
     return (
       <React.Fragment>
@@ -38,20 +38,26 @@ class TestStats extends React.Component {
     );
   };
 
-  renderListRightContent=(student)=>{
+  renderListRightContent = (student) => {
     return (
       <React.Fragment>
-        <button className="ui blue button">{student.status}</button>
+        <Link
+          to={`/teacher/test/evaluate/${this.props.match.params.id}`}
+          className="ui blue button">
+          {student.status}
+        </Link>
       </React.Fragment>
-    )
-  }
+    );
+  };
 
   renderModalHeader = () => {
     return (
       <div className="customui">
         <div className="row">
           <div className="column">Topic : {this.props.testPaper.topic}</div>
-          <div className="column">Max Marks : {this.props.testPaper.maxMarks}</div>
+          <div className="column">
+            Max Marks : {this.props.testPaper.maxMarks}
+          </div>
           <div className="column">
             Attempted by - {" " + this.props.testPaper.attemptedBy} student(s)
           </div>
@@ -67,7 +73,7 @@ class TestStats extends React.Component {
           name="Students' stats"
           items={this.props.testPaper.students}
           content={this.renderListContent}
-          rightContent = {this.renderListRightContent}
+          rightContent={this.renderListRightContent}
           type="justified"
         />
       </>
