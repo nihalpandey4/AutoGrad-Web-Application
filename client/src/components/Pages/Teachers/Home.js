@@ -8,12 +8,20 @@ import "react-toastify/dist/ReactToastify.css";
 import Navbar from "../../NavBar";
 import List from "../../List";
 import "./home.css";
+import Loader from "../../Loader";
 
 class Home extends React.Component {
-  state = { render: false,tests:"none"};
+  state = { userId:null};
 
-  componentDidMount = async() => {
-    await this.props.getAllTests(this.props.userId);
+  componentDidMount() {
+    this.props.getAllTests(this.props.userId);
+  }
+
+  componentDidUpdate = () => {
+    if (this.props.userId !== this.state.userId) {
+      this.setState({ userId: this.props.userId });
+      this.props.getAllTests(this.props.userId);
+    }
   };
 
   copiedTextAlert = () => toast.success("Test ID copied")
@@ -63,10 +71,17 @@ class Home extends React.Component {
     );
   };
 
+  renderLoader=()=>{
+    if(this.props.userId===null){
+      return <Loader />
+    }
+  }
+
   render() {
     return (
       <>
-        <Navbar />
+        {this.renderLoader()}
+        <Navbar />  
         <div style={{ textAlign: "center" }}>
           <ToastContainer autoClose={3000} />
           <List

@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import {Link } from "react-router-dom";
 
 import NavBar from "../../NavBar";
 import Modal from "../../Modal";
@@ -29,11 +30,24 @@ class TestStats extends React.Component {
     );
   };
 
+  renderModalActions=()=>{
+    return(
+      <div className="actions" >
+        <button className="ui disabled button blue" >
+            Show selected student
+        </button>
+        <Link to="/" className="ui button">
+            Cancel
+        </Link>
+      </div>
+    )
+  }
+
   renderContent = () => {
     if (this.props.testPaper==null) {
       return <Loader />;
     }
-    return <Modal header={this.renderModalHeader()}  />;
+    return <Modal header={this.renderModalHeader()} actions={this.renderModalActions()}  />;
   };
 
   render = () => {
