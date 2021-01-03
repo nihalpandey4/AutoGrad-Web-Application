@@ -116,7 +116,7 @@ class AnswerSheet extends React.Component {
   saveResponses = async(formValues)=>{
     let students = this.state.testPaper.students;
     const rollno = this.state.student.rollno;
-    students[rollno] = { ...this.state.student, responses: formValues };
+    students[rollno] = { ...this.state.student, responses: formValues, marksObtained:0,status:"Evaluate" };
     const count = Object.keys(students).length;
     await this.setState({
       testPaper: {
