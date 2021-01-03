@@ -35,8 +35,7 @@ def testscrud(uId,testId):
 @app.route('/<string:userId>',methods=['GET','POST'])
 def home(userId):
     if(request.method=='POST'):
-        _request=request.get_json()
-        document = _request
+        document=request.get_json()
         _id=document["testId"]
         document['_id']=_id
         mongo.db[userId].insert_one(document)
@@ -53,20 +52,20 @@ def home(userId):
 
 @app.route('/tests/<string:testId>',methods=['GET','POST','PUT'])
 def getNewTest(testId):
-    method = request.method
-    if(method=="GET"):
+    
+    if(request.method=="GET"):
         query={}
         query["_id"]=testId
         response  = mongo.db.tests.find_one(query)
         if(response==None):
-            print(response)
             return jsonify({'message':"Error"})
         userId = response['userId']
         document={}
         document = mongo.db[userId].find_one(query)
         document= dumps(document)
         return document  
-    elif(method=="PUT"):
+
+    elif(request.method=="PUT"):
         requestBody=request.get_json()
         query={}
         query["_id"]=testId
