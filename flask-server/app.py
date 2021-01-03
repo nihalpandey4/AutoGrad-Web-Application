@@ -18,19 +18,15 @@ mongo = PyMongo(app)
 def testscrud(uId,testId):
     if(request.method=="GET"):
         tests=mongo.db[uId].find_one({"_id":testId})
-        print("get request")
         tests= dumps(tests)
-        print(tests)
         return tests
     elif(request.method=="PUT"):
         tests=mongo.db[uId].find({"_id":testId})
         tests= dumps(tests)
-        print("putrequest")
         return tests
     else:
         mongo.db[uId].delete_one({"_id":testId})
         mongo.db.tests.delete_one({"_id":testId})
-        print("delete request received")
         return jsonify ({"message":"success"})
 
 @app.route('/<string:userId>',methods=['GET','POST'])
@@ -44,7 +40,6 @@ def home(userId):
         testPaper['_id']=_id
         testPaper['userId'] =userId
         mongo.db.tests.insert_one(testPaper)
-        print("post request")
         return jsonify(document)
     else:
         tests=mongo.db[userId].find()
