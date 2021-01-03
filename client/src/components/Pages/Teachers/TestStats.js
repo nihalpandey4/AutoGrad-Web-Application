@@ -42,7 +42,7 @@ class TestStats extends React.Component {
     return (
       <React.Fragment>
         <Link
-          to={`/teacher/test/evaluate/${this.props.match.params.id}`}
+          to={`/teacher/test/evaluate/${this.props.match.params.id}/${student.rollno}`}
           className="ui blue button">
           {student.status}
         </Link>

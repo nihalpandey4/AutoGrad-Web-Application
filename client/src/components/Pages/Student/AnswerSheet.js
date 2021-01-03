@@ -8,6 +8,7 @@ import AssessmentHeader from "../../AssessmentHeader";
 import Modal from "../../Modal";
 import Loader from "../../Loader";
 import AssessmentForm from "../../AssessmentForm";
+import { Timer } from "react-countdown-clock-timer";
 
 class AnswerSheet extends React.Component {
   state = {
@@ -43,8 +44,12 @@ class AnswerSheet extends React.Component {
           <div className="column">{this.state.testPaper.topic}</div>
         </div>
         <div className="row">
-          <div className="column">Time Limit : {this.state.testPaper.timeLimit} minutes</div>
-          <div className="column">Maximum Marks : {this.state.testPaper.maxMarks}</div>
+          <div className="column">
+            Time Limit : {this.state.testPaper.timeLimit} minutes
+          </div>
+          <div className="column">
+            Maximum Marks : {this.state.testPaper.maxMarks}
+          </div>
         </div>
       </div>
     );
@@ -113,10 +118,15 @@ class AnswerSheet extends React.Component {
     );
   };
 
-  saveResponses = async(formValues)=>{
+  saveResponses = async (formValues) => {
     let students = this.state.testPaper.students;
     const rollno = this.state.student.rollno;
-    students[rollno] = { ...this.state.student, responses: formValues, marksObtained:0,status:"Evaluate" };
+    students[rollno] = {
+      ...this.state.student,
+      responses: formValues,
+      marksObtained: 0,
+      status: "Evaluate",
+    };
     const count = Object.keys(students).length;
     await this.setState({
       testPaper: {
@@ -125,10 +135,33 @@ class AnswerSheet extends React.Component {
         students: students,
       },
     });
-  }
+  };
 
-  onSubmitTest = ()=> {
+  onSubmitTest = () => {
     this.props.submitTest(this.state.testPaper.testId, this.state.testPaper);
+  };
+
+  renderAssessmentHeader = () => {
+    return (
+      <>
+        <div>Max Marks : {this.state.testPaper.maxMarks}</div>
+        <div>{this.state.testPaper.topic}</div>
+        <div style={{ display: "flex" }}>
+          Time Remaining : &nbsp;
+          <Timer
+            durationInSeconds={this.state.testPaper.timeLimit * 60}
+            formatted={true}
+            isPaused={false}
+            onStart={() => {
+              alert(` You have ${this.state.testPaper.timeLimit} minutes`);
+            }}
+            onFinish={() => {
+              alert("Times up!");
+            }}
+          />
+        </div>
+      </>
+    );
   };
 
   renderComponent = () => {
@@ -147,7 +180,7 @@ class AnswerSheet extends React.Component {
       return (
         <>
           <AssessmentHeader
-            testPaper={this.state.testPaper}
+            upperHeader={this.renderAssessmentHeader()}
             student={this.state.student}
           />
           <div className="ui hidden divider"></div>
