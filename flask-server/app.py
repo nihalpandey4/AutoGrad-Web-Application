@@ -29,6 +29,7 @@ def testscrud(uId,testId):
         return tests
     else:
         mongo.db[uId].delete_one({"_id":testId})
+        mongo.db.tests.delete_one({"_id":testId})
         print("delete request received")
         return jsonify ({"message":"success"})
 
