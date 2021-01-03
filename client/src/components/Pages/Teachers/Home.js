@@ -8,13 +8,12 @@ import "react-toastify/dist/ReactToastify.css";
 import Navbar from "../../NavBar";
 import List from "../../List";
 import "./home.css";
-import TestStatus from "../../TestStatus";
 
 class Home extends React.Component {
-  state = { render: false };
+  state = { render: false,tests:"none"};
 
-  componentDidMount = () => {
-    this.props.getAllTests(this.props.userId);
+  componentDidMount = async() => {
+    await this.props.getAllTests(this.props.userId);
   };
 
   copiedTextAlert = () => toast.success("Test ID copied")
@@ -40,7 +39,7 @@ class Home extends React.Component {
   renderRightContent = (item) => {
     return (
       <React.Fragment>
-        <div className="ui button">View</div>
+        <Link to={`teacher/${item.testId}`} className="ui button">View</Link>
         <button
           className="ui blue button"
           onClick={() => this.copyTestId(item.testId)}>

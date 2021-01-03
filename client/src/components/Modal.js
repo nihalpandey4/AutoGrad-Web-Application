@@ -9,6 +9,7 @@ const Modal = (props) => {
     <div
       className="ui dimmer modals visible active"
       onClick={() => history.push("/")}>
+        {props.teacherHeader}
       <div
         className="ui standard modal visible active"
         onClick={(e) => e.stopPropagation()}>
