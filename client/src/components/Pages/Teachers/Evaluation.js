@@ -1,19 +1,20 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { getTestForTeacher } from "../../../actions";
+import { getTestForTeacher,submitTest } from "../../../actions";
 import AssessmentHeader from "../../AssessmentHeader";
 import NavBar from "../../NavBar";
+import EvaluationForm from "../../EvaluationForm";
 
 class Evauation extends React.Component {
   state = { userId: null, student: null, testPaper: null };
 
-    componentDidMount=()=> {
-        if (this.props.userId !== this.state.userId) {
-            this.props.getTestForTeacher(this.props.match.params.id);
-            this.setState({ userId: this.props.userId });
-        }    
+  componentDidMount = () => {
+    if (this.props.userId !== this.state.userId) {
+      this.props.getTestForTeacher(this.props.match.params.id);
+      this.setState({ userId: this.props.userId });
     }
+  };
 
   componentDidUpdate = () => {
     if (this.props.userId !== this.state.userId) {
@@ -21,7 +22,7 @@ class Evauation extends React.Component {
       this.setState({ userId: this.props.userId });
     }
     if (this.state.testPaper !== this.props.testPaper) {
-      this.setState({testPaper: this.props.testPaper});
+      this.setState({ testPaper: this.props.testPaper });
       if (this.props.testPaper) {
         this.setState({
           student: this.props.testPaper.students[
@@ -32,35 +33,58 @@ class Evauation extends React.Component {
     }
   };
 
-  renderAssessmentHeader=()=>{
+  renderAssessmentHeader = () => {
+    return (
+      <>
+        <div>Max Marks : {this.state.testPaper.maxMarks}</div>
+        <div>{this.state.testPaper.topic}</div>
+        <div style={{ display: "flex" }}>
+          Marks Obtained : {this.state.student.marksObtained}
+        </div>
+      </>
+    );
+  };
+
+  updateMarks=(marks)=>{
+    this.setState({student:{...this.state.student,marksObtained:marks}});
+  }
+
+  handleSubmit = async()=>{
+      let testPaper= this.state.testPaper;
+      await this.setState({student:{...this.state.student,status:"Re-evaluate"}})
+      testPaper.students[this.state.student.rollno]=this.state.student;
+      await this.setState({testPaper:testPaper});
+      this.props.submitTest(this.state.testPaper.testId,this.state.testPaper,`/teacher/${this.props.match.params.id}`);
+  }
+
+  renderAssessmentForm = () => {
+    if (this.state.student && this.state.testPaper) {
       return (
-          <>
-            <div>Max Marks : {this.state.testPaper.maxMarks}</div>
-            <div>{this.state.testPaper.topic}</div>
-            <div style={{ display: "flex" }}>
-                Marks Obtained : {this.state.student.marksObtained}
-            </div>
-          </>
-      )
-  }
+        <>
+          <AssessmentHeader
+            upperHeader={this.renderAssessmentHeader()}
+            student={this.state.student}
+          />
+           <EvaluationForm
+            questionPaper={this.state.testPaper.qA}
+            student={this.state.student}
+            updateMarks={this.updateMarks}
+            handleSubmit={this.handleSubmit}
+          /> 
+          <div className="ui hidden divider"></div>
+        </>
+      );
+    }
+  };
 
-  renderAssessmentForm=()=>{
-      if(this.state.student && this.state.testPaper){
-        return <AssessmentHeader
-        upperHeader={this.renderAssessmentHeader()}
-        student={this.state.student}
-      />;
-      }
-  }
-
-  render=()=> {
+  render = () => {
     return (
       <div className="Evaluation">
-        <NavBar />
+        <NavBar activeElement={this.props.match.params.id} to={`/teacher/${this.props.match.params.id}`} />
         {this.renderAssessmentForm()}
       </div>
     );
-  }
+  };
 }
 
 const mapStateToProps = (state, ownProps) => {
@@ -68,4 +92,4 @@ const mapStateToProps = (state, ownProps) => {
   return { userId: state.auth.userId, testPaper: state.allTests[id] };
 };
 
-export default connect(mapStateToProps, { getTestForTeacher })(Evauation);
+export default connect(mapStateToProps, { getTestForTeacher,submitTest })(Evauation);
