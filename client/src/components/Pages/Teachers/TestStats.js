@@ -71,6 +71,16 @@ class TestStats extends React.Component {
   };
 
   renderModalContent = () => {
+    if(!this.props.testPaper.students){
+      return (
+        <div className="center">
+          <h1 className="red center">
+            No records present
+          </h1>
+        </div>
+      )
+    }
+
     return (
       <>
         <List
