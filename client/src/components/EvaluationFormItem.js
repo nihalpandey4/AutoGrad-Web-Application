@@ -10,9 +10,10 @@ class EvaluationFormItem extends React.Component {
     let marks =Number(this.props.response.marks);
     this.setState({marks:marks});
   }
-
+  
   onChange=async(e)=>{
     let mark = e.target.value;
+    await this.props.updateOneMark(this.props.response.id,mark)
     let diff = e.target.value-this.state.marks
     await this.props.updateMarks(diff);
     this.setState({marks:mark})
@@ -63,7 +64,7 @@ class EvaluationFormItem extends React.Component {
           </div>
           <div className="four wide field">
             <label>Marks Awarded: </label>
-            <input type="number" min="0" max={this.props.response.maxMarks} onChange={(e)=>this.onChange(e)} />
+            <input type="number" min="0" max={this.props.response.maxMarks} onChange={(e)=>this.onChange(e)} value={this.state.marks} />
           </div>
         </div>
       </div>

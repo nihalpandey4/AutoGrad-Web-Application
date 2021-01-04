@@ -45,6 +45,19 @@ class Evauation extends React.Component {
     );
   };
 
+  updateOneMark=async(id,marks)=>{
+      let responses  = this.state.student.responses;
+      let totalMarks=0
+      responses.map(response=>{
+          if(response.id===id){
+              response.marks=marks;
+          }
+          totalMarks=Number(totalMarks)+Number(response.marks);
+          return response;
+      })
+      await this.setState({student:{...this.state.student,responses:responses,marksObtained:totalMarks}});
+  }
+
   updateMarks=(marks)=>{
     this.setState({student:{...this.state.student,marksObtained:marks}});
   }
@@ -70,6 +83,7 @@ class Evauation extends React.Component {
             student={this.state.student}
             updateMarks={this.updateMarks}
             handleSubmit={this.handleSubmit}
+            updateOneMark={this.updateOneMark}
           /> 
           <div className="ui hidden divider"></div>
         </>

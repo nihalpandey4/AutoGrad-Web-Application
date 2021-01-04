@@ -19,6 +19,7 @@ class EvaluationForm extends React.Component {
           response={response}
           key={response.id}
           updateMarks={this.updateMarks}
+          updateOneMark={this.props.updateOneMark}
         />
       );
     });

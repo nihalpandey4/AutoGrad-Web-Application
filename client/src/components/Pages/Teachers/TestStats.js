@@ -39,11 +39,15 @@ class TestStats extends React.Component {
   };
 
   renderListRightContent = (student) => {
+    let color="blue"
+    if(student.status==="Re-evaluate"){
+      color="orange"
+    }
     return (
       <React.Fragment>
         <Link
           to={`/teacher/test/evaluate/${this.props.match.params.id}/${student.rollno}`}
-          className="ui blue button">
+          className={`ui ${color} button`}>
           {student.status}
         </Link>
       </React.Fragment>
