@@ -4,10 +4,12 @@
   "description": "Under Process",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "installdependenciespython":"pip3 install -r requirements.txt --prefix flask-server",
-    "installnpm":"npm install --prefix client",
-    "prepare":"concurrently \"npm run installdependenciespython\" \"npm run installnpm\""
+    "installdependenciespython": "pip3 install -r requirements.txt --prefix flask-server",
+    "installnpm": "npm install --prefix client",
+    "dev": "concurrently \"npm run installdependenciespython\" \"npm run installnpm\"",
+    "server": "python3 app.py --prefix flask-server",
+    "client": "npm start --prefix client",
+    "start": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
