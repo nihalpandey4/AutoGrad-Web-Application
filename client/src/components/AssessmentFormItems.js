@@ -21,10 +21,7 @@ class AssessmentFormItem extends React.Component {
   }
 
   onChange = (e) => {
-    if (this.props.wordLimit - 1 < this.state.wordCount) {
-      return;
-    }
-    const answer = e.target.value;
+    const answer = e.target.value.split(" ").slice(0,this.props.wordLimit).join(" ");
     this.setState({
       qA: { ...this.state.qA, Answer: answer },
       wordCount: answer.split(" ").length,
