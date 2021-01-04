@@ -164,6 +164,19 @@ class AnswerSheet extends React.Component {
     );
   };
 
+  renderTimeOut = (fun)=>{
+    return(
+      <Timer
+            durationInSeconds={this.state.testPaper.timeLimit * 60}
+            formatted={true}
+            isPaused={false}
+            onFinish={() => {
+              fun();
+            }}
+          />
+    )
+  }
+
   renderComponent = () => {
     if (this.state.testPaper === null) {
       return <Loader />;
@@ -189,6 +202,7 @@ class AnswerSheet extends React.Component {
             wordLimit={Number(this.state.testPaper.wordLimit)}
             onSubmitTest={this.onSubmitTest}
             saveResponses={this.saveResponses}
+            timer={this.renderTimeOut}
           />
         </>
       );

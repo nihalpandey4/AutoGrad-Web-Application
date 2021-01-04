@@ -35,3 +35,7 @@ div.fields {
     display: flex;
     justify-content:space-between;
 }
+
+.hiddenDiv{
+    display:none;
+}

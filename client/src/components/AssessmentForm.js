@@ -29,6 +29,8 @@ class AssessmentForm extends React.Component {
     this.props.onSubmitTest();
   };
 
+
+
   render() {
     const renderItems = this.props.qA.map((item, index) => {
       return (
@@ -58,6 +60,7 @@ class AssessmentForm extends React.Component {
               }}>
               Submit test
             </button>
+            <div className="hiddenDiv" >{this.props.timer(this.handleSubmit)}</div>
           </div>
         </div>
       </div>
