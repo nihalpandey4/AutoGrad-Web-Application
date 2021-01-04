@@ -8,6 +8,8 @@ class AssessmentFormItem extends React.Component {
       Question: this.props.question,
       Answer: "",
       correctAnswer: this.props.correctAnswer,
+      maxMarks:this.props.maxMarks,
+      marks:0
     },
     wordCount: 0,
   };
