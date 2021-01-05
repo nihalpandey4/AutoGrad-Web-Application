@@ -20,7 +20,14 @@ class EvaluationFormItem extends React.Component {
   }
 
   render() {
-
+    let autograd="loading..."
+    let plagiarism="loading..."
+    if(this.props.response.autograd){
+      autograd=this.props.response.autograd;
+    }
+    if(this.props.response.plagiarism){
+      plagiarism=this.props.response.plagiarism;
+    }
     return (
       <div className="EvaluationFormItem ui segment">
         <div className="bottom inline fields">
@@ -57,10 +64,10 @@ class EvaluationFormItem extends React.Component {
 
         <div className="bottom inline fields">
           <div className="six wide field">
-            <label className="quesiton">Plagiarism - 20% </label>
+            <label className="quesiton">Plagiarism - {plagiarism}% </label>
           </div>
           <div className="six wide field">
-            <label>Suggested by AutoGrad : 3 marks</label>
+            <label>Suggested by AutoGrad : {autograd} </label>
           </div>
           <div className="four wide field">
             <label>Marks Awarded: </label>

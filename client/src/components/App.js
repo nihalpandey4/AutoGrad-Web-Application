@@ -10,6 +10,7 @@ import AnswerSheet from "../components/Pages/Student/AnswerSheet";
 import DeleteTest from "../components/Pages/Teachers/DeleteTest";
 import TestStats from "./Pages/Teachers/TestStats"
 import EvaluationPage from "./Pages/Teachers/Evaluation";
+import Submitted from "./Pages/Student/Submitted";
 
 class App extends React.Component {
   render = () => {
@@ -24,6 +25,7 @@ class App extends React.Component {
             <Route path ="/teacher/:id" exact component ={TestStats} />
             <Route path="/teacher/delete/:id" component={DeleteTest} />
             <Route path="/student/:id" exact component={AnswerSheet} />
+            <Route path="/submitted/:id" exact component={Submitted} />
           </Switch>
         </Router>
       </div>

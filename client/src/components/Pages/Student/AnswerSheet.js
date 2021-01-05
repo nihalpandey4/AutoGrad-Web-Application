@@ -138,7 +138,7 @@ class AnswerSheet extends React.Component {
   };
 
   onSubmitTest = () => {
-    this.props.submitTest(this.state.testPaper.testId, this.state.testPaper);
+    this.props.submitTest(this.state.testPaper.testId, this.state.testPaper,`/submitted/${this.props.testPaper.testId}`);
   };
 
   renderAssessmentHeader = () => {
@@ -152,6 +152,7 @@ class AnswerSheet extends React.Component {
             durationInSeconds={this.state.testPaper.timeLimit * 60}
             formatted={true}
             isPaused={false}
+            onPause={()=>console.log("Timer is paused")}
             onStart={() => {
               alert(` You have ${this.state.testPaper.timeLimit} minutes`);
             }}

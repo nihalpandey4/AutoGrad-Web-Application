@@ -64,16 +64,24 @@ def getNewTest(testId):
     elif(request.method=="PUT"):
         requestBody=request.get_json()
         query={}
-        query["_id"]=testId
-        response  = mongo.db.tests.find_one(query)
-        if(response==None):
-            return jsonify({'message':"Error"})
-        userId = response['userId']
-        document={}
-        document = mongo.db[userId].update(query,requestBody,True)
-        document =dumps(document)
-        return jsonify(document)
+        try:
+            requestBody["students"]
+        except:
+            pass
+        else:
+            query["_id"]=testId
+            response  = mongo.db.tests.find_one(query)
+            if(response==None):
+                return jsonify({'message':"Error"})
+            userId = response['userId']
+            document={}
+            document = mongo.db[userId].update(query,requestBody,True)
+            document =dumps(document)
+            return jsonify(document)
     else:
+        requestBody = request.get_json()
+        print("Evaluating score for - ")
+        print(requestBody)
         return jsonify({"message":"undefined request"})
 
 
