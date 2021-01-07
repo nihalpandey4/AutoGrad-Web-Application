@@ -94,6 +94,7 @@ class AnswerSheet extends React.Component {
     if (e) {
       e.preventDefault();
     }
+    
     try {
       if (this.state.testPaper.students[Number(this.state.student.rollno)]) {
         alert("Already attempted by this user");
