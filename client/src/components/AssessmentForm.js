@@ -1,17 +1,40 @@
 import React from "react";
 
 import AssessmentFormItem from "./AssessmentFormItems";
+import Modal from "./Modal";
 
 class AssessmentForm extends React.Component {
-  state = { responses: [] };
+  state = { responses: [],modal:false };
 
   componentDidMount=()=> {
     document.addEventListener("visibilitychange",async()=>{
       if(document.visibilityState==="hidden"){
-        await alert("Tab switching detected, Submiting test. Press ok to save responses")
-        this.handleSubmit();
+        this.setState({modal:true})
       }
     })
+  }
+
+  renderModalAction=()=>{
+    
+    return (
+      <div className="actions">
+        <button className="ui button green" onClick={() => this.handleSubmit()}>
+          Submit Test
+        </button>
+      </div>
+    );
+  }
+
+  renderModal = ()=>{
+    if (this.state.modal===false){
+      return ;
+    }
+    return (
+      <Modal 
+      header = "Tab switching detected, Submiting test. Press ok to save responses"
+      actions = {this.renderModalAction()}
+      />
+    )
   }
 
   componentWillUnmount=()=>{
@@ -63,6 +86,7 @@ class AssessmentForm extends React.Component {
     return (
       <div className="AssessmentForm">
         <div className="ui segment">
+          {this.renderModal()}
           <form className="ui form">
             {renderItems}
             <div className="ui hidden divider"></div>
