@@ -93,7 +93,7 @@ class Home extends React.Component {
             header = {this.renderListHeader()}
           />
           <Link to="/teacher/new" className="circular ui button primary">
-            <h1 className="newTest"></h1>
+            <h1 className="newTest"> </h1>
           </Link>
           <div className="ui hidden divider"></div>
           <div className="ui hidden divider"></div>

@@ -5,6 +5,21 @@ import AssessmentFormItem from "./AssessmentFormItems";
 class AssessmentForm extends React.Component {
   state = { responses: [] };
 
+  componentDidMount=()=> {
+    document.addEventListener("visibilitychange",async()=>{
+      if(document.visibilityState==="hidden"){
+        await alert("Tab switching detected, Submiting test. Press ok to save responses")
+        this.handleSubmit();
+      }
+    })
+  }
+
+  componentWillUnmount=()=>{
+    document.removeEventListener("visibilitychange",()=>{
+      console.log("Unmounting Tab detection");
+    });
+  }
+
   onSave = async (responseBlock, id) => {
     let flag = "n";
     const responses = this.state.responses;
