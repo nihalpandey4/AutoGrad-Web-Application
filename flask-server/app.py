@@ -2,6 +2,9 @@ from flask import Flask,jsonify,request
 from flask_pymongo import PyMongo
 from bson.json_util import dumps
 from flask_cors import CORS
+from numpy.core.numeric import NaN
+from model.plagiarism import cosine_distance_countvectorizer_method
+import json
 
 app =Flask(__name__)
 CORS(app)
@@ -64,20 +67,31 @@ def getNewTest(testId):
     elif(request.method=="PUT"):
         requestBody=request.get_json()
         query={}
-        try:
-            requestBody["students"]
-        except:
-            pass
-        else:
-            query["_id"]=testId
-            response  = mongo.db.tests.find_one(query)
-            if(response==None):
-                return jsonify({'message':"Error"})
-            userId = response['userId']
-            document={}
-            document = mongo.db[userId].update(query,requestBody,True)
-            document =dumps(document)
-            return jsonify(document)
+        requestBody["students"]
+        query["_id"]=testId
+        response  = mongo.db.tests.find_one(query)
+        if(response==None):
+            return jsonify({'message':"Error"})
+        userId = response['userId']
+        document={}
+        document = mongo.db[userId].update(query,requestBody,True)
+        json_data = requestBody["students"]
+        for key1 in json_data:
+            for response1 in json_data[key1]["responses"]:
+                for key2 in requestBody["students"]:
+                    for response2 in requestBody["students"][key2]["responses"]:
+                        if key1 !=key2 and response1["id"] == response2["id"]:
+                            score = cosine_distance_countvectorizer_method(response1["Answer"],response2["Answer"])
+                            try:
+                                if(int(response2["plagiarism"])<score):
+                                    response2["plagiarism"]=score
+                            except:
+                                response2["plagiarism"]=score
+                            if(response2["plagiarism"]==NaN):
+                                response2["plagiarism"]=0
+        document = mongo.db[userId].update(query,requestBody,True)
+        document =dumps(document)
+        return jsonify(document)
     else:
         requestBody = request.get_json()
         print("Evaluating score for - ")
